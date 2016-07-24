@@ -16,6 +16,7 @@
 #import "RunDetailsViewController.h"
 #import "BadgeController.h"
 #import "Badge.h"
+#import <AVFoundation/AVFoundation.h>
 
 static NSString * const detailSegueName = @"NewRunDetails";
 
@@ -174,8 +175,15 @@ static NSString * const detailSegueName = @"NewRunDetails";
     //NSLog(@"TIME VALUE IN SECONDS: %i", self.seconds);
     double mins = self.seconds/60.0;
     NSLog(@"TIME VALUE IN MINUTES: %f", mins);
-    if(fmod(mins,5) == 0){
+    if(fmod(mins,2) == 0){
         NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
+        
+        NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes, distance %@, speed %@ minutes per mile.", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance],[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:newText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        [synth speakUtterance:utterance];
     }
     
     self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [MathController stringifyDistance:self.distance]];

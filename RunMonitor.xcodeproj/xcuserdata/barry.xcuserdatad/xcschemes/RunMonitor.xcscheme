@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FA1F95061929CF2600A0179A"
-               BuildableName = "MoonRunner.app"
+               BuildableName = "RunMonitor.app"
                BlueprintName = "RunMonitor"
                ReferencedContainer = "container:RunMonitor.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FA1F95061929CF2600A0179A"
-            BuildableName = "MoonRunner.app"
+            BuildableName = "RunMonitor.app"
             BlueprintName = "RunMonitor"
             ReferencedContainer = "container:RunMonitor.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FA1F95061929CF2600A0179A"
-            BuildableName = "MoonRunner.app"
+            BuildableName = "RunMonitor.app"
             BlueprintName = "RunMonitor"
             ReferencedContainer = "container:RunMonitor.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FA1F95061929CF2600A0179A"
-            BuildableName = "MoonRunner.app"
+            BuildableName = "RunMonitor.app"
             BlueprintName = "RunMonitor"
             ReferencedContainer = "container:RunMonitor.xcodeproj">
          </BuildableReference>

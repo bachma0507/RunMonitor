@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CE042F81D4535C00015FE6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE042F71D4535C00015FE6E /* AVFoundation.framework */; };
 		FA0B80C01939189600CDCA53 /* MulticolorPolylineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0B80BF1939189600CDCA53 /* MulticolorPolylineSegment.m */; };
 		FA0CFA8A192C734000973491 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA0CFA89192C734000973491 /* success.wav */; };
 		FA0CFA8D192C771900973491 /* MathController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0CFA8C192C771900973491 /* MathController.m */; };
@@ -82,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CE042F71D4535C00015FE6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FA0B80BE1939189600CDCA53 /* MulticolorPolylineSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticolorPolylineSegment.h; sourceTree = "<group>"; };
 		FA0B80BF1939189600CDCA53 /* MulticolorPolylineSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticolorPolylineSegment.m; sourceTree = "<group>"; };
 		FA0CFA89192C734000973491 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE042F81D4535C00015FE6E /* AVFoundation.framework in Frameworks */,
 				FA1F950D1929CF2600A0179A /* CoreGraphics.framework in Frameworks */,
 				FA1F95111929CF2600A0179A /* CoreData.framework in Frameworks */,
 				FA1F950F1929CF2600A0179A /* UIKit.framework in Frameworks */,
@@ -221,6 +224,7 @@
 		FA1F95091929CF2600A0179A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CE042F71D4535C00015FE6E /* AVFoundation.framework */,
 				FA1F950A1929CF2600A0179A /* Foundation.framework */,
 				FA1F950C1929CF2600A0179A /* CoreGraphics.framework */,
 				FA1F950E1929CF2600A0179A /* UIKit.framework */,
