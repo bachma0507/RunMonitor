@@ -170,20 +170,45 @@ static NSString * const detailSegueName = @"NewRunDetails";
 {
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
     
+    NSLog(@"DISTANCE/SECONDS: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
     
+    
+    if(self.distance/self.seconds > 0){
+        NSString *mySpeed = [[NSString alloc]initWithFormat:@"%@",[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+        NSString *speedTrunc7 = [mySpeed substringToIndex:[mySpeed length]-7];
+        //NSLog(@"VALUE OF SPEEDTRUNC7 MIN:SEC: %@", speedTrunc7);
+        
+        NSString *speedTrunc3 = [speedTrunc7 substringToIndex:[speedTrunc7 length]-3];
+        //NSLog(@"VALUE OF SPEEDTRUNC3 MIN: %@", speedTrunc3);
+        
+        NSString *speedTrunc3begin = [speedTrunc7 substringFromIndex:3];
+        //NSLog(@"VALUE OF SPEEDTRUNC3BEGIN SEC: %@", speedTrunc3begin);
+    //}
+    
+    //NSString *mySpeed = [[NSString alloc]initWithFormat:@"%@",[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+    
+    //NSString *speedTrunc = [mySpeed substringToIndex:[mySpeed length]-10];
     
     //NSLog(@"TIME VALUE IN SECONDS: %i", self.seconds);
     double mins = self.seconds/60.0;
-    NSLog(@"TIME VALUE IN MINUTES: %f", mins);
-    if(fmod(mins,2) == 0){
+    //NSLog(@"TIME VALUE IN MINUTES: %f", mins);
+    //NSLog(@"VALUE OF SPEED: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
+    //NSLog(@"VALUE OF SPEED MINUTES: %@", mySpeed);
+    if(fmod(mins,1) == 0){
         NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
         
-        NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes, distance %@, speed %@ minutes per mile.", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance],[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
+        NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes, distance %@, speed %@ minutes %@ seconds per mile.", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
         
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:newText];
         AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.volume = 0.75;
+        
         [synth speakUtterance:utterance];
+    }
     }
     
     self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [MathController stringifyDistance:self.distance]];
