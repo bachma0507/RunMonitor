@@ -194,7 +194,7 @@ static NSString * const detailSegueName = @"NewRunDetails";
     //NSLog(@"TIME VALUE IN MINUTES: %f", mins);
     //NSLog(@"VALUE OF SPEED: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
     //NSLog(@"VALUE OF SPEED MINUTES: %@", mySpeed);
-    if(fmod(mins,1) == 0){
+    if(fmod(mins,5) == 0){
         NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
         
         NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes, distance %@, speed %@ minutes %@ seconds per mile.", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
