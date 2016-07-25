@@ -51,24 +51,39 @@ static NSString * const detailSegueName = @"NewRunDetails";
 {
     [super viewWillAppear:animated];
     
-    self.startButton.hidden = NO;
-    self.promptLabel.hidden = NO;
+    self.startButton.hidden = YES;
+    self.promptLabel.hidden = YES;
     
     self.timeLabel.text = @"";
-    self.timeLabel.hidden = YES;
-    self.distLabel.hidden = YES;
-    self.paceLabel.hidden = YES;
+    self.timeLabel.hidden = NO;
+    self.distLabel.hidden = NO;
+    self.paceLabel.hidden = NO;
     self.nextBadgeLabel.hidden = YES;
-    self.stopButton.hidden = YES;
+    self.stopButton.hidden = NO;
     self.nextBadgeImageView.hidden = YES;
     self.progressImageView.hidden = YES;
-    self.mapView.hidden = YES;
+    self.mapView.hidden = NO;
+    
+    [self startrun];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.timer invalidate];
+}
+
+-(void) startrun{
+    
+    self.seconds = 0;
+    
+    // initialize the timer
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
+    
+    self.distance = 0;
+    self.locations = [NSMutableArray array];
+    
+    [self startLocationUpdates];
 }
 
 #pragma mark - IBActions
@@ -275,7 +290,7 @@ static NSString * const detailSegueName = @"NewRunDetails";
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self.locationManager stopUpdatingLocation];
+    //[self.locationManager stopUpdatingLocation];
     
     // save
     if (buttonIndex == 0) {
