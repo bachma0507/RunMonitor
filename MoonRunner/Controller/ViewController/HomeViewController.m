@@ -11,8 +11,9 @@
 #import "PastRunsViewController.h"
 #import "BadgesTableViewController.h"
 #import "BadgeController.h"
+#import <MapKit/MapKit.h>
 
-@interface HomeViewController ()
+@interface HomeViewController () <MKMapViewDelegate>
 
 @property (strong, nonatomic) NSArray *runArray;
 
