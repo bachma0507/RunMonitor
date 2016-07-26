@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "HomeViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation AppDelegate
 
@@ -9,7 +10,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	
+    NSError *error = NULL;
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:&error];
+    if(error) {
+        // Do some error handling
+        NSLog(@"There was an error with AVAudioSession:%@", error.description);
+    }
+    [session setActive:YES error:&error];
+    if (error) {
+        // Do some error handling
+        NSLog(@"There was an error with AVAudioSession session setActive:%@", error.description);
+    }
     
     
     

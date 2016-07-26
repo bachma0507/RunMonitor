@@ -41,11 +41,16 @@ NSString * const detailSegueName = @"NewRunDetails";
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 
+
+//@property (nonatomic, strong) AVAudioPlayer * _audioPlayer;
+
+
 @end
 
 @implementation NewRunViewController
 
 #pragma mark - Lifecycle
+
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -207,6 +212,7 @@ NSString * const detailSegueName = @"NewRunDetails";
 - (void)updateLabels
 {
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
+    //NSLog(@"TIME IS: %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO]);
     
     NSLog(@"DISTANCE/SECONDS: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
     
@@ -222,6 +228,10 @@ NSString * const detailSegueName = @"NewRunDetails";
         NSString *speedTrunc3begin = [speedTrunc7 substringFromIndex:3];
         //NSLog(@"VALUE OF SPEEDTRUNC3BEGIN SEC: %@", speedTrunc3begin);
     //}
+        
+         NSString *myTime = [[NSString alloc]initWithFormat:@"%@",[MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
+         NSString *timeTrunc3 = [myTime substringToIndex:[myTime length]-3];
+         NSString *timeTrunc3begin = [myTime substringFromIndex:3];
     
     //NSString *mySpeed = [[NSString alloc]initWithFormat:@"%@",[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
     
@@ -233,19 +243,41 @@ NSString * const detailSegueName = @"NewRunDetails";
     //NSLog(@"VALUE OF SPEED: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
     //NSLog(@"VALUE OF SPEED MINUTES: %@", mySpeed);
     if(fmod(mins,5) == 0){
-        NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
         
-        NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes, distance %@, speed %@ minutes %@ seconds per mile.", [MathController stringifySecondCount:self.seconds usingLongFormat:NO],[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
+        if([timeTrunc3 isEqualToString:@"05"]){
+            NSString *fiveMinuteTime = @"5";
+            NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", fiveMinuteTime, timeTrunc3begin,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
+            
+            NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES %@ SECONDS! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", fiveMinuteTime, timeTrunc3begin,[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
+            
+            AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                            speechUtteranceWithString:newText];
+            AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+            
+            utterance.rate = 0.45;
+            utterance.pitchMultiplier = 0.95;
+            utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
+            utterance.volume = 0.75;
+            
+            [synth speakUtterance:utterance];
+            
+        }else{
+        NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES %@ SECONDS! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", timeTrunc3, timeTrunc3begin,[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
         
+        NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", timeTrunc3, timeTrunc3begin,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
+        
+                
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:newText];
         AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
         
         utterance.rate = 0.45;
         utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
         utterance.volume = 0.75;
         
         [synth speakUtterance:utterance];
+            }
     }
     }
     
@@ -261,6 +293,7 @@ NSString * const detailSegueName = @"NewRunDetails";
 //        NSLog(@"YOU HAVE BEEN RUNNING FOR 5 MINUTES! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@",[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
 //    }
 }
+
 
 - (void) maybePlaySound
 {
@@ -300,6 +333,13 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     self.locationManager.activityType = CLActivityTypeFitness;
     
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+        self.locationManager.allowsBackgroundLocationUpdates = YES;
+    }
+    
     // Movement threshold for new events.
     self.locationManager.distanceFilter = 10; // meters
     
@@ -308,6 +348,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     }
     [self.locationManager startUpdatingLocation];
 }
+
 
 #pragma mark - UIActionSheetDelegate
 
