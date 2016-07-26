@@ -18,7 +18,7 @@
 #import "Badge.h"
 #import <AVFoundation/AVFoundation.h>
 
-static NSString * const detailSegueName = @"NewRunDetails";
+NSString * const detailSegueName = @"NewRunDetails";
 
 @interface NewRunViewController () <UIActionSheetDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
@@ -75,6 +75,12 @@ static NSString * const detailSegueName = @"NewRunDetails";
 
 -(void) startrun{
     
+    UIBackgroundTaskIdentifier bgTask;
+    UIApplication  *app = [UIApplication sharedApplication];
+    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:bgTask];
+    }];
+    
     self.seconds = 0;
     
     // initialize the timer
@@ -117,15 +123,31 @@ static NSString * const detailSegueName = @"NewRunDetails";
 
 - (IBAction)stopPressed:(id)sender
 {
+    NSLog(@"Pace label test:%@", self.paceLabel.text);
+    NSLog(@"Distance label test:%@", self.distLabel.text);
+    
+    if([self.paceLabel.text isEqualToString:@"Speed: 0"] && [self.distLabel.text isEqualToString:@"Distance: 0.00 mi"]){
+        
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles: @"Discard", nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        [actionSheet showInView:self.view];
+        
+    }
+    else{
+    
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Save", @"Discard", nil];
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showInView:self.view];
+    }
 }
 
 #pragma mark - Private
 
 - (void)saveRun
 {
+    
+    
     Run *newRun = [NSEntityDescription insertNewObjectForEntityForName:@"Run" inManagedObjectContext:self.managedObjectContext];
     
     newRun.distance = [NSNumber numberWithFloat:self.distance];
@@ -151,6 +173,7 @@ static NSString * const detailSegueName = @"NewRunDetails";
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    
 }
 
 - (void)eachSecond
@@ -292,6 +315,18 @@ static NSString * const detailSegueName = @"NewRunDetails";
 {
     //[self.locationManager stopUpdatingLocation];
     
+    NSLog(@"Pace label test:%@", self.paceLabel.text);
+    NSLog(@"Distance label test:%@", self.distLabel.text);
+    
+    if([self.paceLabel.text isEqualToString:@"Speed: 0"] && [self.distLabel.text isEqualToString:@"Distance: 0.00 mi"]){
+        
+        // discard
+        if (buttonIndex == 0) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
+    else{
+    
     // save
     if (buttonIndex == 0) {
         [self saveRun];
@@ -300,6 +335,7 @@ static NSString * const detailSegueName = @"NewRunDetails";
     // discard
     } else if (buttonIndex == 1) {
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     }
 }
 
