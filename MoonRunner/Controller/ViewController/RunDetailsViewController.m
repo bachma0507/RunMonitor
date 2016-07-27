@@ -21,6 +21,7 @@ static float const mapPadding = 1.1f;
 @property (nonatomic, weak) IBOutlet UILabel *paceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *badgeImageView;
 @property (nonatomic, weak) IBOutlet UIButton *infoButton;
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 - (IBAction)goHome:(id)sender;
 
 
@@ -81,6 +82,28 @@ static float const mapPadding = 1.1f;
     
     Badge *badge = [[BadgeController defaultController] bestBadgeForDistance:self.run.distance.floatValue];
     self.badgeImageView.image = [UIImage imageNamed:badge.imageName];
+    
+    NSLog(@"BADGE IMAGENAME: %@", badge.imageName);
+    
+    if([badge.imageName isEqualToString:@"white.png"]){
+    
+        self.noticeLabel.text = @"Congrats! You are at badge level White. Reach 5 miles to get to badge level Bronze.";
+    }
+    else if([badge.imageName isEqualToString:@"bronze.png"]){
+        self.noticeLabel.text = @"Congrats! You are at badge level Bronze. Reach 10 miles to get to badge level Silver.";
+    }
+    else if([badge.imageName isEqualToString:@"silver.png"]){
+        self.noticeLabel.text = @"Congrats! You are at badge level Silver. Reach 15 miles to get to badge level Gold.";
+    }
+    else if([badge.imageName isEqualToString:@"gold.png"]){
+        self.noticeLabel.text = @"Congrats! You are at badge level Gold. Reach 20 miles to get to badge level Royal Purple.";
+    }
+    else if([badge.imageName isEqualToString:@"royalpurple.png"]){
+        self.noticeLabel.text = @"Congrats! You are at the highest badge level Royal Purple and have reached over 25 miles. You've done it!";
+    }
+    else{
+        self.noticeLabel.text = @"";
+    }
 }
 
 - (void)loadMap

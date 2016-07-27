@@ -285,6 +285,89 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.paceLabel.text = [NSString stringWithFormat:@"Speed: %@",  [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
     self.nextBadgeLabel.text = [NSString stringWithFormat:@"%@ until %@!", [MathController stringifyDistance:(self.upcomingBadge.distance - self.distance)], self.upcomingBadge.name];
     
+    NSLog(@"DISTANCE IS: %@",[MathController stringifyDistance:self.distance]);
+    
+    if([[MathController stringifyDistance:self.distance] isEqualToString:@"1.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"2.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"3.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"4.00 mi"]){
+        
+        NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level white. Get to 5 miles to reach badge level bronze.", [MathController stringifyDistance:self.distance]];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:mileText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utterance.volume = 0.75;
+        
+        [synth speakUtterance:utterance];
+        
+    }
+    else if([[MathController stringifyDistance:self.distance] isEqualToString:@"5.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"6.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"7.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"8.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"9.00 mi"]){
+        
+        NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level bronze. Get to 10 miles to reach badge level silver.", [MathController stringifyDistance:self.distance]];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:mileText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utterance.volume = 0.75;
+        
+        [synth speakUtterance:utterance];
+        
+    }
+    else if([[MathController stringifyDistance:self.distance] isEqualToString:@"10.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"11.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"12.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"13.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"14.00 mi"]){
+        
+        NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level silver. Get to 15 miles to reach badge level gold.", [MathController stringifyDistance:self.distance]];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:mileText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utterance.volume = 0.75;
+        
+        [synth speakUtterance:utterance];
+        
+    }
+    else if([[MathController stringifyDistance:self.distance] isEqualToString:@"15.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"16.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"17.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"18.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"19.00 mi"]){
+        
+        NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level gold. Get to 20 miles to reach badge level royal purple.", [MathController stringifyDistance:self.distance]];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:mileText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utterance.volume = 0.75;
+        
+        [synth speakUtterance:utterance];
+        
+    }
+    else if([[MathController stringifyDistance:self.distance] isEqualToString:@"20.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"21.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"22.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"23.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"24.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"25.00 mi"]){
+        
+        NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level royal purple. You have reached the highest badge level.", [MathController stringifyDistance:self.distance]];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:mileText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utterance.volume = 0.75;
+        
+        [synth speakUtterance:utterance];
+        
+    }
+    
 //    if([[MathController stringifySecondCount:self.seconds usingLongFormat:NO] isEqual:@"01:00"]){
 //        NSLog(@"YOU HAVE BEEN RUNNING FOR 1 MINUTE! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@",[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
 //    }

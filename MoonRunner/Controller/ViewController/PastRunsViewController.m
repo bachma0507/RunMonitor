@@ -33,6 +33,7 @@
     Badge *badge = [[BadgeController defaultController] bestBadgeForDistance:runObject.distance.floatValue];
     cell.badgeImageView.image = [UIImage imageNamed:badge.imageName];
     
+    
     return cell;
 }
 

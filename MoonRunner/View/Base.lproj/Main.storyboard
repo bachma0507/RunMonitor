@@ -428,6 +428,12 @@
                                     <action selector="infoButtonPressed:" destination="Ah7-4n-0Wa" eventType="touchUpInside" id="WeY-gU-AIH"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="notice" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="253" translatesAutoresizingMaskIntoConstraints="NO" id="hNt-Hi-bLU">
+                                <rect key="frame" x="23" y="468" width="253" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.98431372549999996" green="0.73725490199999999" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -444,6 +450,7 @@
                         <outlet property="distanceLabel" destination="5Ba-Lp-HwS" id="OPm-aH-EJJ"/>
                         <outlet property="infoButton" destination="OZh-8x-JvY" id="RuY-o6-5II"/>
                         <outlet property="mapView" destination="IsM-S6-PUA" id="764-uM-yKL"/>
+                        <outlet property="noticeLabel" destination="hNt-Hi-bLU" id="e18-de-q6h"/>
                         <outlet property="paceLabel" destination="rbD-6D-1tI" id="jHg-jJ-NmP"/>
                         <outlet property="timeLabel" destination="F1X-ZW-HrZ" id="7mY-02-j0F"/>
                     </connections>
