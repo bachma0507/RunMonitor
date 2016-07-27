@@ -1,9 +1,9 @@
 //
 //  MathController.h
-//  RunMaster
+//  RunMonitor
 //
-//  Created by Matt Luedke on 5/20/14.
-//  Copyright (c) 2014 Matt Luedke. All rights reserved.
+//  Created by Barry Julien on 5/20/16.
+//  Copyright (c) 2016 Barry Julien. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
