@@ -40,7 +40,7 @@ float const goldMultiplier = 1.10;
 
 + (NSArray *)badgeArray
 {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"badges" ofType:@"txt"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"badges2" ofType:@"txt"];
     NSString *jsonContent = [NSString stringWithContentsOfFile:filePath usedEncoding:nil error:nil];
     NSData *data = [jsonContent dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *badgeDicts = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];

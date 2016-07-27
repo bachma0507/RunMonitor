@@ -16,6 +16,12 @@
 		4CE043041D4574FD0015FE6E /* Spinel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE043031D4574FD0015FE6E /* Spinel.jpg */; };
 		4CE043061D4575400015FE6E /* Opal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE043051D4575400015FE6E /* Opal.jpg */; };
 		4CE043081D4575810015FE6E /* Pyrite.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE043071D4575810015FE6E /* Pyrite.jpg */; };
+		4CE22E971D4843150003655D /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE22E921D4843150003655D /* white.png */; };
+		4CE22E981D4843150003655D /* bronze.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE22E931D4843150003655D /* bronze.png */; };
+		4CE22E991D4843150003655D /* silver.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE22E941D4843150003655D /* silver.png */; };
+		4CE22E9A1D4843150003655D /* gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE22E951D4843150003655D /* gold.png */; };
+		4CE22E9B1D4843150003655D /* royalpurple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE22E961D4843150003655D /* royalpurple.png */; };
+		4CE22E9D1D484BE90003655D /* badges2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4CE22E9C1D484BE90003655D /* badges2.txt */; };
 		FA0B80C01939189600CDCA53 /* MulticolorPolylineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0B80BF1939189600CDCA53 /* MulticolorPolylineSegment.m */; };
 		FA0CFA8A192C734000973491 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA0CFA89192C734000973491 /* success.wav */; };
 		FA0CFA8D192C771900973491 /* MathController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0CFA8C192C771900973491 /* MathController.m */; };
@@ -100,6 +106,12 @@
 		4CE043031D4574FD0015FE6E /* Spinel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Spinel.jpg; sourceTree = "<group>"; };
 		4CE043051D4575400015FE6E /* Opal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Opal.jpg; sourceTree = "<group>"; };
 		4CE043071D4575810015FE6E /* Pyrite.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pyrite.jpg; sourceTree = "<group>"; };
+		4CE22E921D4843150003655D /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
+		4CE22E931D4843150003655D /* bronze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bronze.png; sourceTree = "<group>"; };
+		4CE22E941D4843150003655D /* silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silver.png; sourceTree = "<group>"; };
+		4CE22E951D4843150003655D /* gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gold.png; sourceTree = "<group>"; };
+		4CE22E961D4843150003655D /* royalpurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = royalpurple.png; sourceTree = "<group>"; };
+		4CE22E9C1D484BE90003655D /* badges2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = badges2.txt; sourceTree = "<group>"; };
 		FA0B80BE1939189600CDCA53 /* MulticolorPolylineSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticolorPolylineSegment.h; sourceTree = "<group>"; };
 		FA0B80BF1939189600CDCA53 /* MulticolorPolylineSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticolorPolylineSegment.m; sourceTree = "<group>"; };
 		FA0CFA89192C734000973491 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
@@ -341,6 +353,12 @@
 		FAE22DBD1931A21D00F362F7 /* badges */ = {
 			isa = PBXGroup;
 			children = (
+				4CE22E9C1D484BE90003655D /* badges2.txt */,
+				4CE22E921D4843150003655D /* white.png */,
+				4CE22E931D4843150003655D /* bronze.png */,
+				4CE22E941D4843150003655D /* silver.png */,
+				4CE22E951D4843150003655D /* gold.png */,
+				4CE22E961D4843150003655D /* royalpurple.png */,
 				4CE043071D4575810015FE6E /* Pyrite.jpg */,
 				4CE043051D4575400015FE6E /* Opal.jpg */,
 				4CE043031D4574FD0015FE6E /* Spinel.jpg */,
@@ -467,6 +485,7 @@
 				FAE22DB71931A1E900F362F7 /* saturn.jpg in Resources */,
 				FAE22DA11931A1E900F362F7 /* ariel.jpg in Resources */,
 				FAE22DB31931A1E900F362F7 /* oberon.jpg in Resources */,
+				4CE22E991D4843150003655D /* silver.png in Resources */,
 				4CE043081D4575810015FE6E /* Pyrite.jpg in Resources */,
 				FAE22DBB1931A1E900F362F7 /* triton.jpg in Resources */,
 				FAE22DB61931A1E900F362F7 /* rhea.jpg in Resources */,
@@ -479,10 +498,12 @@
 				FAE22DA91931A1E900F362F7 /* europa.jpg in Resources */,
 				4CE043021D4574A30015FE6E /* Goldenberyl.jpg in Resources */,
 				FA1E89441932F65E0039A4CD /* earth.jpg in Resources */,
+				4CE22E9B1D4843150003655D /* royalpurple.png in Resources */,
 				FAE22DB91931A1E900F362F7 /* titan.jpg in Resources */,
 				FA1F95171929CF2600A0179A /* InfoPlist.strings in Resources */,
 				FAE22DC21931A23600F362F7 /* kuiper_belt.png in Resources */,
 				FAE22DA41931A1E900F362F7 /* callisto.jpg in Resources */,
+				4CE22E9A1D4843150003655D /* gold.png in Resources */,
 				FAE22DAC1931A1E900F362F7 /* interstellar_space.jpg in Resources */,
 				FAE22DAA1931A1E900F362F7 /* ganymede.jpg in Resources */,
 				FAE22DBA1931A1E900F362F7 /* titania.jpg in Resources */,
@@ -492,16 +513,19 @@
 				FAE22DB51931A1E900F362F7 /* pluto.jpg in Resources */,
 				4CE042FE1D456D180015FE6E /* Carnelian.jpg in Resources */,
 				FAE22DC31931A23600F362F7 /* magnetotail.png in Resources */,
+				4CE22E971D4843150003655D /* white.png in Resources */,
 				FAE22DAB1931A1E900F362F7 /* iapetus.jpg in Resources */,
 				FA1E89481932FC690039A4CD /* mars.jpg in Resources */,
 				FAE22DA61931A1E900F362F7 /* deimos.jpg in Resources */,
 				FAE22DB81931A1E900F362F7 /* tethys.jpg in Resources */,
 				4CE042FA1D456B190015FE6E /* peridoto.jpg in Resources */,
 				FA1E89461932F80D0039A4CD /* badges.txt in Resources */,
+				4CE22E9D1D484BE90003655D /* badges2.txt in Resources */,
 				FAE22DB21931A1E900F362F7 /* moon.jpg in Resources */,
 				FAE22DB41931A1E900F362F7 /* phobos.jpg in Resources */,
 				FAE22DA71931A1E900F362F7 /* dione.jpg in Resources */,
 				4CE043041D4574FD0015FE6E /* Spinel.jpg in Resources */,
+				4CE22E981D4843150003655D /* bronze.png in Resources */,
 				FA1F95201929CF2600A0179A /* Main.storyboard in Resources */,
 				4CE043001D456D720015FE6E /* Citrine.jpg in Resources */,
 				FAE22DB11931A1E900F362F7 /* miranda.jpg in Resources */,
