@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CDE08051D4A8DA000D77137 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE08041D4A8DA000D77137 /* SettingsViewController.m */; };
 		4CE042F81D4535C00015FE6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE042F71D4535C00015FE6E /* AVFoundation.framework */; };
 		4CE042FA1D456B190015FE6E /* peridoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE042F91D456B190015FE6E /* peridoto.jpg */; };
 		4CE042FC1D456CDA0015FE6E /* jasper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE042FB1D456CDA0015FE6E /* jasper.jpg */; };
@@ -97,6 +98,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CDE08031D4A8DA000D77137 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		4CDE08041D4A8DA000D77137 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		4CE042F71D4535C00015FE6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4CE042F91D456B190015FE6E /* peridoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = peridoto.jpg; sourceTree = "<group>"; };
 		4CE042FB1D456CDA0015FE6E /* jasper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jasper.jpg; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				FAB9AA34192DD92300FF8E47 /* BadgesTableViewController.m */,
 				FAB9AA2D192DD01300FF8E47 /* BadgeDetailsViewController.h */,
 				FAB9AA2E192DD01300FF8E47 /* BadgeDetailsViewController.m */,
+				4CDE08031D4A8DA000D77137 /* SettingsViewController.h */,
+				4CDE08041D4A8DA000D77137 /* SettingsViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				FAB9AA35192DD92300FF8E47 /* BadgesTableViewController.m in Sources */,
 				FAB9AA22192DB4CC00FF8E47 /* RunCell.m in Sources */,
 				FA1F95261929CF2600A0179A /* PastRunsViewController.m in Sources */,
+				4CDE08051D4A8DA000D77137 /* SettingsViewController.m in Sources */,
 				FAB9AA2F192DD01300FF8E47 /* BadgeDetailsViewController.m in Sources */,
 				FA1F951D1929CF2600A0179A /* AppDelegate.m in Sources */,
 				FA24F25519481C6200500593 /* Run.m in Sources */,

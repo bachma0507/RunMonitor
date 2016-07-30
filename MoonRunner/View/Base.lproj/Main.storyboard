@@ -65,14 +65,78 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NZ0-tQ-fQG"/>
+                    <navigationItem key="navigationItem" id="NZ0-tQ-fQG">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="24y-JD-P0G">
+                            <connections>
+                                <segue destination="Psd-Ml-kdD" kind="push" id="nqa-vj-MNI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="badgesButton" destination="uhm-BQ-cu8" id="a70-G1-G9y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20T-qI-lpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="26" y="64"/>
+            <point key="canvasLocation" x="-64" y="-9"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="mH3-VC-n9D">
+            <objects>
+                <viewController id="Psd-Ml-kdD" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9UD-Ba-Uwy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vd5-YM-7xM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ARO-Rk-z31">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTl-rF-8Pz">
+                                <rect key="frame" x="82" y="72" width="156" height="30"/>
+                                <state key="normal" title="Mile Marker Voice On"/>
+                                <connections>
+                                    <action selector="mileMarkerButtonPressed:" destination="Psd-Ml-kdD" eventType="touchUpInside" id="uoy-ha-1yf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilR-am-qNc">
+                                <rect key="frame" x="47" y="125" width="226" height="30"/>
+                                <state key="normal" title="5 Minute Marker Voice On"/>
+                                <connections>
+                                    <action selector="minuteMarkerButtonPressed:" destination="Psd-Ml-kdD" eventType="touchUpInside" id="KfK-hm-AE0"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGN-P5-8d5">
+                                <rect key="frame" x="47" y="185" width="96" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="65m-os-D6X">
+                                <rect key="frame" x="141" y="181" width="159" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyS-fQ-xVK">
+                                <rect key="frame" x="137" y="219" width="46" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="Psd-Ml-kdD" eventType="touchUpInside" id="46Q-4S-Hl1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="EYt-hN-9wW"/>
+                    <connections>
+                        <outlet property="mileMarkerButton" destination="rTl-rF-8Pz" id="yn4-6P-VRN"/>
+                        <outlet property="minuteMarkerButton" destination="ilR-am-qNc" id="mwa-g4-i0F"/>
+                        <outlet property="nameTextField" destination="65m-os-D6X" id="Y66-vc-weT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfh-da-aBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="314" y="-405"/>
         </scene>
         <!--New Run-->
         <scene sceneID="fGt-mZ-WXf">
@@ -166,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NqF-a1-EIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="474" y="-645"/>
+            <point key="canvasLocation" x="806" y="-653"/>
         </scene>
         <!--Master-->
         <scene sceneID="VgW-fR-Quf">

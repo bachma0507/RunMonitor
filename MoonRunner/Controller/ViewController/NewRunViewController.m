@@ -41,6 +41,8 @@ NSString * const detailSegueName = @"NewRunDetails";
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
 
+@property (strong, nonatomic) NSArray *objects;
+//@property (nonatomic, strong) NSString *voiceMileValueStr;
 
 //@property (nonatomic, strong) AVAudioPlayer * _audioPlayer;
 
@@ -80,6 +82,46 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 -(void) startrun{
     
+//     NSManagedObject *newVoice = [NSEntityDescription insertNewObjectForEntityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+//    
+//    NSString *voiceMileStr = @"no";
+//    
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//    // Edit the entity name as appropriate.
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+//    [fetchRequest setEntity:entity];
+//    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'no' || voicemile == 'yes'"]];
+//    
+//    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+//    
+//    self.objects = results;
+//    
+//    if (!results || !results.count){
+//        NSLog(@"NO RESULTS FOR VOICEMILE IN MANAGEDOBJECTCONTEXT");
+//        [newVoice setValue:voiceMileStr forKey:@"voicemile"];
+//        
+//        // Save the context.
+//        NSError *error = nil;
+//        if (![self.managedObjectContext save:&error]) {
+//            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//            abort();
+//        }
+//
+//    }
+//    else{
+//        NSManagedObject *object = [results objectAtIndex:0];
+//        [object setValue:voiceMileStr forKey:@"voicemile"];
+//        
+//        NSError *error = nil;
+//        // Save the object to persistent store
+//        if (![self.managedObjectContext save:&error]) {
+//            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+//        }
+//        
+//    }
+
+    
+    
     UIBackgroundTaskIdentifier bgTask;
     UIApplication  *app = [UIApplication sharedApplication];
     bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
@@ -101,29 +143,31 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 -(IBAction)startPressed:(id)sender
 {
-    // hide the start UI
-    self.startButton.hidden = YES;
-    self.promptLabel.hidden = YES;
     
-    // show the running UI
-    self.timeLabel.hidden = NO;
-    self.distLabel.hidden = NO;
-    self.paceLabel.hidden = NO;
-    self.stopButton.hidden = NO;
-    self.progressImageView.hidden = YES;
-    self.nextBadgeImageView.hidden = YES;
-    self.nextBadgeLabel.hidden = YES;
-    self.mapView.hidden = NO;
     
-    self.seconds = 0;
-    
-    // initialize the timer
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
-    
-    self.distance = 0;
-    self.locations = [NSMutableArray array];
-    
-    [self startLocationUpdates];
+//    // hide the start UI
+//    self.startButton.hidden = YES;
+//    self.promptLabel.hidden = YES;
+//    
+//    // show the running UI
+//    self.timeLabel.hidden = NO;
+//    self.distLabel.hidden = NO;
+//    self.paceLabel.hidden = NO;
+//    self.stopButton.hidden = NO;
+//    self.progressImageView.hidden = YES;
+//    self.nextBadgeImageView.hidden = YES;
+//    self.nextBadgeLabel.hidden = YES;
+//    self.mapView.hidden = NO;
+//    
+//    self.seconds = 0;
+//    
+//    // initialize the timer
+//	self.timer = [NSTimer scheduledTimerWithTimeInterval:(1.0) target:self selector:@selector(eachSecond) userInfo:nil repeats:YES];
+//    
+//    self.distance = 0;
+//    self.locations = [NSMutableArray array];
+//    
+//    [self startLocationUpdates];
 }
 
 - (IBAction)stopPressed:(id)sender
@@ -211,6 +255,8 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 - (void)updateLabels
 {
+    
+    
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
     //NSLog(@"TIME IS: %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO]);
     
@@ -285,7 +331,19 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.paceLabel.text = [NSString stringWithFormat:@"Speed: %@",  [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
     self.nextBadgeLabel.text = [NSString stringWithFormat:@"%@ until %@!", [MathController stringifyDistance:(self.upcomingBadge.distance - self.distance)], self.upcomingBadge.name];
     
-    NSLog(@"DISTANCE IS: %@",[MathController stringifyDistance:self.distance]);
+    //NSLog(@"NEXT BADGE TEXT IS: %@",self.nextBadgeLabel.text);
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'no'"]];
+    
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
+    self.objects = results;
+    
+        if (!results || !results.count){ //begin if no results
     
     if([[MathController stringifyDistance:self.distance] isEqualToString:@"1.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"2.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"3.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"4.00 mi"]){
         
@@ -367,6 +425,11 @@ NSString * const detailSegueName = @"NewRunDetails";
         [synth speakUtterance:utterance];
         
     }
+    }//end if no results
+else{
+    NSLog(@"VOICEMILE SET TO NO");
+    
+        }
     
 //    if([[MathController stringifySecondCount:self.seconds usingLongFormat:NO] isEqual:@"01:00"]){
 //        NSLog(@"YOU HAVE BEEN RUNNING FOR 1 MINUTE! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@",[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
@@ -376,6 +439,7 @@ NSString * const detailSegueName = @"NewRunDetails";
 //        NSLog(@"YOU HAVE BEEN RUNNING FOR 5 MINUTES! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@",[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
 //    }
 }
+
 
 
 - (void) maybePlaySound

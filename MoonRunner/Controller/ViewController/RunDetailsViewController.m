@@ -26,6 +26,7 @@ static float const mapPadding = 1.1f;
 
 
 
+
 @end
 
 @implementation RunDetailsViewController
@@ -218,4 +219,5 @@ static float const mapPadding = 1.1f;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 @end

@@ -16,5 +16,7 @@
 @dynamic duration;
 @dynamic timestamp;
 @dynamic locations;
+//@dynamic voicemin;
+//@dynamic voicemile;
 
 @end

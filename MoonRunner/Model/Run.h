@@ -17,6 +17,9 @@
 @property (nonatomic, retain) NSNumber * duration;
 @property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) NSOrderedSet *locations;
+
+//@property (nonatomic, retain) NSString * voicemin;
+//@property (nonatomic, retain) NSString * voicemile;
 @end
 
 @interface Run (CoreDataGeneratedAccessors)
