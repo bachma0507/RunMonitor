@@ -88,19 +88,19 @@ static float const mapPadding = 1.1f;
     
     if([badge.imageName isEqualToString:@"white.png"]){
     
-        self.noticeLabel.text = @"Congrats! You are at badge level White. Reach 5 miles to get to badge level Bronze.";
+        self.noticeLabel.text = @"Congrats! You ran between 0 and 5 miles and got to badge level White on this run.";
     }
     else if([badge.imageName isEqualToString:@"bronze.png"]){
-        self.noticeLabel.text = @"Congrats! You are at badge level Bronze. Reach 10 miles to get to badge level Silver.";
+        self.noticeLabel.text = @"Congrats! You ran between 5 and 10 miles and got to badge level Bronze on this run.";
     }
     else if([badge.imageName isEqualToString:@"silver.png"]){
-        self.noticeLabel.text = @"Congrats! You are at badge level Silver. Reach 15 miles to get to badge level Gold.";
+        self.noticeLabel.text = @"Congrats! You ran between 10 and 15 miles and got to badge level Silver on this run.";
     }
     else if([badge.imageName isEqualToString:@"gold.png"]){
-        self.noticeLabel.text = @"Congrats! You are at badge level Gold. Reach 20 miles to get to badge level Royal Purple.";
+        self.noticeLabel.text = @"Congrats! You ran between 15 and 20 miles and got to badge level Gold on this run.";
     }
     else if([badge.imageName isEqualToString:@"royalpurple.png"]){
-        self.noticeLabel.text = @"Congrats! You are at the highest badge level Royal Purple and have reached over 25 miles. You've done it!";
+        self.noticeLabel.text = @"Congrats! You ran more than 20 miles and got to badge level Royal Purple on this run. You've done it!";
     }
     else{
         self.noticeLabel.text = @"";

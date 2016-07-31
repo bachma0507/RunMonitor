@@ -258,10 +258,10 @@ NSString * const detailSegueName = @"NewRunDetails";
     
     
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
-    //NSLog(@"TIME IS: %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO]);
+    NSLog(@"TIME IS: %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO]);
     
-    NSLog(@"DISTANCE/SECONDS: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
-    
+    //NSLog(@"DISTANCE/SECONDS: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
+    NSLog(@"SECONDS: %d", self.seconds);
     
     if(self.distance/self.seconds > 0){
         NSString *mySpeed = [[NSString alloc]initWithFormat:@"%@",[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
@@ -278,6 +278,8 @@ NSString * const detailSegueName = @"NewRunDetails";
          NSString *myTime = [[NSString alloc]initWithFormat:@"%@",[MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
          NSString *timeTrunc3 = [myTime substringToIndex:[myTime length]-3];
          NSString *timeTrunc3begin = [myTime substringFromIndex:3];
+        
+        
     
     //NSString *mySpeed = [[NSString alloc]initWithFormat:@"%@",[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
     
@@ -290,6 +292,8 @@ NSString * const detailSegueName = @"NewRunDetails";
     //NSLog(@"VALUE OF SPEED MINUTES: %@", mySpeed);
     if(fmod(mins,5) == 0){
         
+        if(self.seconds < 3600){
+            
         if([timeTrunc3 isEqualToString:@"05"]){
             NSString *fiveMinuteTime = @"5";
             NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", fiveMinuteTime, timeTrunc3begin,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
@@ -325,6 +329,33 @@ NSString * const detailSegueName = @"NewRunDetails";
         [synth speakUtterance:utterance];
             }
     }
+        else if (self.seconds >= 3600){
+            NSString *myTime = [[NSString alloc]initWithFormat:@"%@",[MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
+            NSString *timeTruncHour = [myTime substringToIndex:[myTime length]-6];
+            NSString *timeTruncHourMin = [myTime substringToIndex:[myTime length]-3];
+            NSString *timeTruncMin = [timeTruncHourMin substringFromIndex:3];
+            NSString *timeTruncSec = [myTime substringFromIndex:6];
+            
+            NSLog(@"YOU HAVE BEEN RUNNING FOR %@ HOURS %@ MINUTES %@ SECONDS! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", timeTruncHour, timeTruncMin, timeTruncSec,[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
+            
+            NSString * newTextHour = [[NSString alloc] initWithFormat:@"Time %@ hours %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", timeTruncHour, timeTruncMin, timeTruncSec,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
+            
+            
+            AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                            speechUtteranceWithString:newTextHour];
+            AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+            
+            utterance.rate = 0.45;
+            utterance.pitchMultiplier = 0.95;
+            utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-GB"];
+            utterance.volume = 0.75;
+            
+            [synth speakUtterance:utterance];
+            
+        }
+    }
+        
+        
     }
     
     self.distLabel.text = [NSString stringWithFormat:@"Distance: %@", [MathController stringifyDistance:self.distance]];

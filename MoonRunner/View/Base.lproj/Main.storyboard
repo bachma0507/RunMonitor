@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blackbkgnd" translatesAutoresizingMaskIntoConstraints="NO" id="JZi-B9-1Bs">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="orange_runner_2_darkgreybg" translatesAutoresizingMaskIntoConstraints="NO" id="JZi-B9-1Bs">
                                 <rect key="frame" x="135" y="163" width="50" height="50"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhm-BQ-cu8">
@@ -33,7 +33,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to RunMonitor!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="196" translatesAutoresizingMaskIntoConstraints="NO" id="cw4-mk-z52">
                                 <rect key="frame" x="62" y="68" width="196" height="74"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.97647058823529409" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NTG-Q6-5rU">
@@ -62,11 +62,12 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.12156862745098039" green="0.12549019607843137" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="NZ0-tQ-fQG">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="24y-JD-P0G">
+                            <color key="tintColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Psd-Ml-kdD" kind="push" id="nqa-vj-MNI"/>
                             </connections>
@@ -125,7 +126,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.1215686275" green="0.12549019610000001" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="EYt-hN-9wW"/>
                     <connections>
@@ -549,11 +550,11 @@
     </scenes>
     <resources>
         <image name="atmosphere.jpg" width="800" height="531"/>
-        <image name="blackbkgnd" width="334" height="334"/>
         <image name="blue-btn" width="236" height="76"/>
         <image name="green-btn" width="172" height="91"/>
         <image name="info_default" width="60" height="59"/>
         <image name="info_pressed" width="60" height="59"/>
+        <image name="orange_runner_2_darkgreybg" width="334" height="334"/>
         <image name="spaceship-gold" width="50" height="68"/>
         <image name="spaceship-silver" width="50" height="68"/>
     </resources>

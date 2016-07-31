@@ -46,9 +46,11 @@
     
     if (!results || !results.count){
         [self.mileMarkerButton setTitle:@"Mile Marker Voice On" forState:normal];
+        [self.mileMarkerButton setTitleColor:[UIColor greenColor] forState:normal];
     }
     else{
         [self.mileMarkerButton setTitle:@"Mile Marker Voice Off" forState:normal];
+        [self.mileMarkerButton setTitleColor:[UIColor redColor] forState:normal];
     }
     
 
@@ -82,6 +84,7 @@
             abort();
         }
         [self.mileMarkerButton setTitle:@"Mile Marker Voice Off" forState:normal];
+        [self.mileMarkerButton setTitleColor:[UIColor redColor] forState:normal];
     }
     else{
         NSManagedObject *object = [results objectAtIndex:0];
@@ -92,7 +95,9 @@
         if (![self.managedObjectContext save:&error]) {
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
         }
-        [self.mileMarkerButton setTitle:@"Mile Marker Voice On" forState:normal];    }
+        [self.mileMarkerButton setTitle:@"Mile Marker Voice On" forState:normal];
+        [self.mileMarkerButton setTitleColor:[UIColor greenColor] forState:normal];
+    }
 
 }
 
