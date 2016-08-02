@@ -16,13 +16,15 @@
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Location" inverseName="run" inverseEntity="Location" syncable="YES"/>
     </entity>
     <entity name="Voice" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="total" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="voicemile" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="voicemin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="voicestart" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="voicestop" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Location" positionX="0" positionY="0" width="128" height="105"/>
         <element name="Run" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="Voice" positionX="9" positionY="54" width="128" height="90"/>
+        <element name="Voice" positionX="9" positionY="54" width="128" height="120"/>
     </elements>
 </model>

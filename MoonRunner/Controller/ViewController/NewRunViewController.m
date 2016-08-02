@@ -22,6 +22,12 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 @interface NewRunViewController () <UIActionSheetDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
+{
+    double pastMiles;
+    double currentMiles;
+    double totalMiles;
+}
+
 @property int seconds;
 @property float distance;
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -40,6 +46,8 @@ NSString * const detailSegueName = @"NewRunDetails";
 @property (nonatomic, weak) IBOutlet UIButton *startButton;
 @property (nonatomic, weak) IBOutlet UIButton *stopButton;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
+
+
 
 @property (strong, nonatomic) NSArray *objects;
 //@property (nonatomic, strong) NSString *voiceMileValueStr;
@@ -128,6 +136,41 @@ NSString * const detailSegueName = @"NewRunDetails";
         [app endBackgroundTask:bgTask];
     }];
     
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicestart == 'no'"]];
+    
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
+    self.objects = results;
+    
+    if (!results || !results.count){ //begin if no results
+        
+        
+            
+            NSString *startText = [[NSString alloc]initWithFormat:@"Run started."];
+            
+            AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                            speechUtteranceWithString:startText];
+            AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+            
+            utterance.rate = 0.45;
+            utterance.pitchMultiplier = 0.95;
+            utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+            utterance.volume = 0.75;
+            
+            [synth speakUtterance:utterance];
+            
+        
+    }
+    else{
+        NSLog(@"START RUN VOICE IS OFF.");
+        
+    }
+    
+    
     self.seconds = 0;
     
     // initialize the timer
@@ -196,12 +239,13 @@ NSString * const detailSegueName = @"NewRunDetails";
 - (void)saveRun
 {
     
-    
     Run *newRun = [NSEntityDescription insertNewObjectForEntityForName:@"Run" inManagedObjectContext:self.managedObjectContext];
     
     newRun.distance = [NSNumber numberWithFloat:self.distance];
     newRun.duration = [NSNumber numberWithInt:self.seconds];
     newRun.timestamp = [NSDate date];
+    
+    //NSLog(@"DISTANCE IS %.2f", self.distance/1609.344);
     
     NSMutableArray *locationArray = [NSMutableArray array];
     for (CLLocation *location in self.locations) {
@@ -264,6 +308,19 @@ NSString * const detailSegueName = @"NewRunDetails";
     NSLog(@"SECONDS: %d", self.seconds);
     
     if(self.distance/self.seconds > 0){
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        // Edit the entity name as appropriate.
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemin == 'no'"]];
+        
+        NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+        
+        self.objects = results;
+        
+        if (!results || !results.count){ //begin if no results
+            
         NSString *mySpeed = [[NSString alloc]initWithFormat:@"%@",[MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]];
         NSString *speedTrunc7 = [mySpeed substringToIndex:[mySpeed length]-7];
         //NSLog(@"VALUE OF SPEEDTRUNC7 MIN:SEC: %@", speedTrunc7);
@@ -278,6 +335,8 @@ NSString * const detailSegueName = @"NewRunDetails";
          NSString *myTime = [[NSString alloc]initWithFormat:@"%@",[MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
          NSString *timeTrunc3 = [myTime substringToIndex:[myTime length]-3];
          NSString *timeTrunc3begin = [myTime substringFromIndex:3];
+        
+        
         
         
     
@@ -354,7 +413,11 @@ NSString * const detailSegueName = @"NewRunDetails";
             
         }
     }
-        
+        }//End if no results
+        else{
+            NSLog(@"VOICEMIN SET TO NO");
+            
+        }
         
     }
     

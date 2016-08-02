@@ -7,6 +7,7 @@
 #import "Location.h"
 #import "MulticolorPolylineSegment.h"
 #import "BadgeAnnotation.h"
+#import <AVFoundation/AVFoundation.h>
 
 static float const mapPadding = 1.1f;
 
@@ -22,6 +23,13 @@ static float const mapPadding = 1.1f;
 @property (nonatomic, weak) IBOutlet UIImageView *badgeImageView;
 @property (nonatomic, weak) IBOutlet UIButton *infoButton;
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
+
+@property (nonatomic, strong) NSString * currentRun;
+@property (nonatomic, strong) NSString * pastRun;
+@property (nonatomic, strong) NSString * totalRun;
+
+@property (strong, nonatomic) NSArray *objects;
+
 - (IBAction)goHome:(id)sender;
 
 
@@ -73,6 +81,9 @@ static float const mapPadding = 1.1f;
 {
     self.distanceLabel.text = [MathController stringifyDistance:self.run.distance.floatValue];
     
+    id delegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [delegate managedObjectContext];
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [formatter stringFromDate:self.run.timestamp];
@@ -80,6 +91,48 @@ static float const mapPadding = 1.1f;
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [MathController stringifySecondCount:self.run.duration.intValue usingLongFormat:YES]];
     
     self.paceLabel.text = [NSString stringWithFormat:@"Speed: %@",  [MathController stringifyAvgPaceFromDist:self.run.distance.floatValue overTime:self.run.duration.intValue]];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicestop == 'no'"]];
+    
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
+    self.objects = results;
+    
+    if (!results || !results.count){ //begin if no results
+        
+        NSString *paceTrunc7 = [self.paceLabel.text substringToIndex:[self.paceLabel.text length]-7];
+        //NSLog(@"PACETRUNC7 is %@", paceTrunc7);
+        NSString *paceTrunc6begin = [paceTrunc7 substringFromIndex:6];
+        NSString *paceSec = [paceTrunc6begin substringFromIndex:3];
+        NSString *paceMin = [paceTrunc6begin substringToIndex:[paceTrunc6begin length]-3];
+        
+        //NSLog(@"PACETRUNC^BEGIN is %@, PACESEC is %@, PACEMIN is %@", paceTrunc6begin, paceSec, paceMin);
+        
+        
+        NSString *stopText = [[NSString alloc]initWithFormat:@"Run saved. Distance %@, %@, Speed %@ minutes %@ seconds per mile.", self.distanceLabel.text, self.timeLabel.text, paceMin, paceSec];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:stopText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utterance.volume = 0.75;
+        
+        [synth speakUtterance:utterance];
+        
+        
+    }
+    else{
+        NSLog(@"STOP RUN VOICE IS OFF.");
+        
+    }
+    
     
     Badge *badge = [[BadgeController defaultController] bestBadgeForDistance:self.run.distance.floatValue];
     self.badgeImageView.image = [UIImage imageNamed:badge.imageName];

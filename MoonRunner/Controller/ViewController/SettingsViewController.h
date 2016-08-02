@@ -13,9 +13,14 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (weak, nonatomic) IBOutlet UIButton *mileMarkerButton;
 @property (weak, nonatomic) IBOutlet UIButton *minuteMarkerButton;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UIButton *startRunButton;
+@property (weak, nonatomic) IBOutlet UIButton *stopRunButton;
+
 - (IBAction)mileMarkerButtonPressed:(id)sender;
 - (IBAction)minuteMarkerButtonPressed:(id)sender;
-- (IBAction)saveButtonPressed:(id)sender;
+- (IBAction)startRunButtonPressed:(id)sender;
+- (IBAction)stopRunButtonPressed:(id)sender;
+
+
 
 @end

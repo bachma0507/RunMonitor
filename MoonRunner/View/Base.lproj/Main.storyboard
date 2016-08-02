@@ -107,22 +107,18 @@
                                     <action selector="minuteMarkerButtonPressed:" destination="Psd-Ml-kdD" eventType="touchUpInside" id="KfK-hm-AE0"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGN-P5-8d5">
-                                <rect key="frame" x="47" y="185" width="96" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="65m-os-D6X">
-                                <rect key="frame" x="141" y="181" width="159" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyS-fQ-xVK">
-                                <rect key="frame" x="137" y="219" width="46" height="30"/>
-                                <state key="normal" title="Save"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9N-td-dxZ">
+                                <rect key="frame" x="92" y="184" width="136" height="30"/>
+                                <state key="normal" title="Start Run Voice On"/>
                                 <connections>
-                                    <action selector="saveButtonPressed:" destination="Psd-Ml-kdD" eventType="touchUpInside" id="46Q-4S-Hl1"/>
+                                    <action selector="startRunButtonPressed:" destination="Psd-Ml-kdD" eventType="touchUpInside" id="0dD-8d-qli"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Et-5j-Hgp">
+                                <rect key="frame" x="86" y="245" width="149" height="30"/>
+                                <state key="normal" title="Stop Run Voice On"/>
+                                <connections>
+                                    <action selector="stopRunButtonPressed:" destination="Psd-Ml-kdD" eventType="touchUpInside" id="Cx3-PD-aPi"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -132,7 +128,8 @@
                     <connections>
                         <outlet property="mileMarkerButton" destination="rTl-rF-8Pz" id="yn4-6P-VRN"/>
                         <outlet property="minuteMarkerButton" destination="ilR-am-qNc" id="mwa-g4-i0F"/>
-                        <outlet property="nameTextField" destination="65m-os-D6X" id="Y66-vc-weT"/>
+                        <outlet property="startRunButton" destination="Y9N-td-dxZ" id="2ds-dd-ahh"/>
+                        <outlet property="stopRunButton" destination="5Et-5j-Hgp" id="4Fe-Y5-n9g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfh-da-aBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -213,7 +210,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.12156862745098039" green="0.12549019607843137" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Run" id="MJ0-T7-r1w"/>
                     <connections>
@@ -241,7 +238,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.12156862745098039" green="0.12549019607843137" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RunCell" rowHeight="80" id="m0d-ak-lc9" customClass="RunCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="80"/>
@@ -500,7 +497,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.12156862745098039" green="0.12549019607843137" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Run" id="uoN-sX-iAF">
                         <barButtonItem key="rightBarButtonItem" title="Home" id="ZoD-hO-MB2">
@@ -559,6 +556,6 @@
         <image name="spaceship-silver" width="50" height="68"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NtA-Fc-TxQ"/>
+        <segue reference="jUr-3t-vfg"/>
     </inferredMetricsTieBreakers>
 </document>
