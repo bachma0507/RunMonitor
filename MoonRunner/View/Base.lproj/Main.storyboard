@@ -67,7 +67,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="NZ0-tQ-fQG">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="24y-JD-P0G">
-                            <color key="tintColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.5725490196078431" green="0.56470588235294117" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Psd-Ml-kdD" kind="push" id="nqa-vj-MNI"/>
                             </connections>

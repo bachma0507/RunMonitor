@@ -303,7 +303,7 @@
     }
     else{
         NSManagedObject *object = [results objectAtIndex:0];
-        [object setValue:@"yes" forKey:@"voicestart"];
+        [object setValue:@"yes" forKey:@"voicestop"];
         
         NSError *error = nil;
         // Save the object to persistent store
