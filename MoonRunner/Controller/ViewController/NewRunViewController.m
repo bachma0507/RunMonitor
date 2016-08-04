@@ -109,6 +109,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.progressImageView.hidden = YES;
     self.mapView.hidden = NO;
     
+    
     [self startrun];
     
     [self playMusic];
