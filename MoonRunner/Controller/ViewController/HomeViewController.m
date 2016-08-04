@@ -12,8 +12,10 @@
 #import "BadgesTableViewController.h"
 #import "BadgeController.h"
 #import <MapKit/MapKit.h>
+#import "GVMusicPlayerController.h"
+#import "NSString+TimeToString.h"
 
-@interface HomeViewController () <MKMapViewDelegate>
+@interface HomeViewController () <MKMapViewDelegate, GVMusicPlayerControllerDelegate, MPMediaPickerControllerDelegate>
 
 @property (strong, nonatomic) NSArray *runArray;
 
@@ -26,6 +28,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [[GVMusicPlayerController sharedInstance] stop];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription

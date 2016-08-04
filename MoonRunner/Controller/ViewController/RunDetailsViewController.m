@@ -122,7 +122,7 @@ static float const mapPadding = 1.1f;
         utterance.rate = 0.45;
         utterance.pitchMultiplier = 0.95;
         utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
-        utterance.volume = 0.75;
+        utterance.volume = 1.0;
         
         [synth speakUtterance:utterance];
         

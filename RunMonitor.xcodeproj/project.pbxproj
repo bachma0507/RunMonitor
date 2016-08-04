@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C0FED371D52506F0005C062 /* GVMusicPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0FED361D52506F0005C062 /* GVMusicPlayerController.m */; };
+		4C0FED3A1D52509F0005C062 /* NSString+TimeToString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0FED391D52509F0005C062 /* NSString+TimeToString.m */; };
+		4C0FED3C1D5251560005C062 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0FED3B1D5251560005C062 /* CoreMedia.framework */; };
+		4C0FED3E1D5251600005C062 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0FED3D1D5251600005C062 /* AudioToolbox.framework */; };
+		4C0FED401D5251680005C062 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0FED3F1D5251680005C062 /* CoreAudio.framework */; };
+		4C0FED421D5251720005C062 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C0FED411D5251720005C062 /* MediaPlayer.framework */; };
+		4C0FED4F1D5265670005C062 /* Controls_Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED431D5265670005C062 /* Controls_Pause.png */; };
+		4C0FED501D5265670005C062 /* Controls_Pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED441D5265670005C062 /* Controls_Pause@2x.png */; };
+		4C0FED511D5265670005C062 /* Controls_Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED451D5265670005C062 /* Controls_Play.png */; };
+		4C0FED521D5265670005C062 /* Controls_Play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED461D5265670005C062 /* Controls_Play@2x.png */; };
+		4C0FED531D5265670005C062 /* Controls_Rewind_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED471D5265670005C062 /* Controls_Rewind_Pressed.png */; };
+		4C0FED541D5265670005C062 /* Controls_Rewind_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED481D5265670005C062 /* Controls_Rewind_Pressed@2x.png */; };
+		4C0FED551D5265670005C062 /* Controls_Rewind.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED491D5265670005C062 /* Controls_Rewind.png */; };
+		4C0FED561D5265670005C062 /* Controls_Rewind@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED4A1D5265670005C062 /* Controls_Rewind@2x.png */; };
+		4C0FED571D5265670005C062 /* Controls_Skip_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED4B1D5265670005C062 /* Controls_Skip_Pressed.png */; };
+		4C0FED581D5265670005C062 /* Controls_Skip_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED4C1D5265670005C062 /* Controls_Skip_Pressed@2x.png */; };
+		4C0FED591D5265670005C062 /* Controls_Skip.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED4D1D5265670005C062 /* Controls_Skip.png */; };
+		4C0FED5A1D5265670005C062 /* Controls_Skip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C0FED4E1D5265670005C062 /* Controls_Skip@2x.png */; };
 		4CDE08051D4A8DA000D77137 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE08041D4A8DA000D77137 /* SettingsViewController.m */; };
 		4CE042F81D4535C00015FE6E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE042F71D4535C00015FE6E /* AVFoundation.framework */; };
 		4CE042FA1D456B190015FE6E /* peridoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4CE042F91D456B190015FE6E /* peridoto.jpg */; };
@@ -98,6 +116,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C0FED351D5250660005C062 /* GVMusicPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVMusicPlayerController.h; sourceTree = "<group>"; };
+		4C0FED361D52506F0005C062 /* GVMusicPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVMusicPlayerController.m; sourceTree = "<group>"; };
+		4C0FED381D52509F0005C062 /* NSString+TimeToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TimeToString.h"; sourceTree = "<group>"; };
+		4C0FED391D52509F0005C062 /* NSString+TimeToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeToString.m"; sourceTree = "<group>"; };
+		4C0FED3B1D5251560005C062 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4C0FED3D1D5251600005C062 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		4C0FED3F1D5251680005C062 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		4C0FED411D5251720005C062 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		4C0FED431D5265670005C062 /* Controls_Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Controls_Pause.png; sourceTree = "<group>"; };
+		4C0FED441D5265670005C062 /* Controls_Pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Controls_Pause@2x.png"; sourceTree = "<group>"; };
+		4C0FED451D5265670005C062 /* Controls_Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Controls_Play.png; sourceTree = "<group>"; };
+		4C0FED461D5265670005C062 /* Controls_Play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Controls_Play@2x.png"; sourceTree = "<group>"; };
+		4C0FED471D5265670005C062 /* Controls_Rewind_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Controls_Rewind_Pressed.png; sourceTree = "<group>"; };
+		4C0FED481D5265670005C062 /* Controls_Rewind_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Controls_Rewind_Pressed@2x.png"; sourceTree = "<group>"; };
+		4C0FED491D5265670005C062 /* Controls_Rewind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Controls_Rewind.png; sourceTree = "<group>"; };
+		4C0FED4A1D5265670005C062 /* Controls_Rewind@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Controls_Rewind@2x.png"; sourceTree = "<group>"; };
+		4C0FED4B1D5265670005C062 /* Controls_Skip_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Controls_Skip_Pressed.png; sourceTree = "<group>"; };
+		4C0FED4C1D5265670005C062 /* Controls_Skip_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Controls_Skip_Pressed@2x.png"; sourceTree = "<group>"; };
+		4C0FED4D1D5265670005C062 /* Controls_Skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Controls_Skip.png; sourceTree = "<group>"; };
+		4C0FED4E1D5265670005C062 /* Controls_Skip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Controls_Skip@2x.png"; sourceTree = "<group>"; };
 		4CDE08031D4A8DA000D77137 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4CDE08041D4A8DA000D77137 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		4CE042F71D4535C00015FE6E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -202,6 +240,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C0FED421D5251720005C062 /* MediaPlayer.framework in Frameworks */,
+				4C0FED401D5251680005C062 /* CoreAudio.framework in Frameworks */,
+				4C0FED3E1D5251600005C062 /* AudioToolbox.framework in Frameworks */,
+				4C0FED3C1D5251560005C062 /* CoreMedia.framework in Frameworks */,
 				4CE042F81D4535C00015FE6E /* AVFoundation.framework in Frameworks */,
 				FA1F950D1929CF2600A0179A /* CoreGraphics.framework in Frameworks */,
 				FA1F95111929CF2600A0179A /* CoreData.framework in Frameworks */,
@@ -224,9 +266,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C0FED341D5250400005C062 /* GVMusicPlayerController */ = {
+			isa = PBXGroup;
+			children = (
+				4C0FED381D52509F0005C062 /* NSString+TimeToString.h */,
+				4C0FED391D52509F0005C062 /* NSString+TimeToString.m */,
+				4C0FED361D52506F0005C062 /* GVMusicPlayerController.m */,
+				4C0FED351D5250660005C062 /* GVMusicPlayerController.h */,
+			);
+			name = GVMusicPlayerController;
+			sourceTree = "<group>";
+		};
 		FA0CFA88192C732700973491 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4C0FED431D5265670005C062 /* Controls_Pause.png */,
+				4C0FED441D5265670005C062 /* Controls_Pause@2x.png */,
+				4C0FED451D5265670005C062 /* Controls_Play.png */,
+				4C0FED461D5265670005C062 /* Controls_Play@2x.png */,
+				4C0FED471D5265670005C062 /* Controls_Rewind_Pressed.png */,
+				4C0FED481D5265670005C062 /* Controls_Rewind_Pressed@2x.png */,
+				4C0FED491D5265670005C062 /* Controls_Rewind.png */,
+				4C0FED4A1D5265670005C062 /* Controls_Rewind@2x.png */,
+				4C0FED4B1D5265670005C062 /* Controls_Skip_Pressed.png */,
+				4C0FED4C1D5265670005C062 /* Controls_Skip_Pressed@2x.png */,
+				4C0FED4D1D5265670005C062 /* Controls_Skip.png */,
+				4C0FED4E1D5265670005C062 /* Controls_Skip@2x.png */,
 				FAE22DBD1931A21D00F362F7 /* badges */,
 				FA0CFA89192C734000973491 /* success.wav */,
 				FA1F952A1929CF2600A0179A /* Images.xcassets */,
@@ -255,6 +320,10 @@
 		FA1F95091929CF2600A0179A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C0FED411D5251720005C062 /* MediaPlayer.framework */,
+				4C0FED3F1D5251680005C062 /* CoreAudio.framework */,
+				4C0FED3D1D5251600005C062 /* AudioToolbox.framework */,
+				4C0FED3B1D5251560005C062 /* CoreMedia.framework */,
 				4CE042F71D4535C00015FE6E /* AVFoundation.framework */,
 				FA1F950A1929CF2600A0179A /* Foundation.framework */,
 				FA1F950C1929CF2600A0179A /* CoreGraphics.framework */,
@@ -323,6 +392,7 @@
 		FA30BD0E192B17F600CD453E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4C0FED341D5250400005C062 /* GVMusicPlayerController */,
 				FAB9AA29192DCFDF00FF8E47 /* ViewController */,
 				FA1F951B1929CF2600A0179A /* AppDelegate.h */,
 				FA1F951C1929CF2600A0179A /* AppDelegate.m */,
@@ -487,11 +557,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAE22DA51931A1E900F362F7 /* ceres.jpg in Resources */,
+				4C0FED511D5265670005C062 /* Controls_Play.png in Resources */,
 				FAE22DB71931A1E900F362F7 /* saturn.jpg in Resources */,
 				FAE22DA11931A1E900F362F7 /* ariel.jpg in Resources */,
 				FAE22DB31931A1E900F362F7 /* oberon.jpg in Resources */,
 				4CE22E991D4843150003655D /* silver.png in Resources */,
 				4CE043081D4575810015FE6E /* Pyrite.jpg in Resources */,
+				4C0FED571D5265670005C062 /* Controls_Skip_Pressed.png in Resources */,
 				FAE22DBB1931A1E900F362F7 /* triton.jpg in Resources */,
 				FAE22DB61931A1E900F362F7 /* rhea.jpg in Resources */,
 				FAE22DB01931A1E900F362F7 /* mimas.jpg in Resources */,
@@ -505,15 +577,18 @@
 				FA1E89441932F65E0039A4CD /* earth.jpg in Resources */,
 				4CE22E9B1D4843150003655D /* royalpurple.png in Resources */,
 				FAE22DB91931A1E900F362F7 /* titan.jpg in Resources */,
+				4C0FED501D5265670005C062 /* Controls_Pause@2x.png in Resources */,
 				FA1F95171929CF2600A0179A /* InfoPlist.strings in Resources */,
 				FAE22DC21931A23600F362F7 /* kuiper_belt.png in Resources */,
 				FAE22DA41931A1E900F362F7 /* callisto.jpg in Resources */,
 				4CE22E9A1D4843150003655D /* gold.png in Resources */,
 				FAE22DAC1931A1E900F362F7 /* interstellar_space.jpg in Resources */,
 				FAE22DAA1931A1E900F362F7 /* ganymede.jpg in Resources */,
+				4C0FED521D5265670005C062 /* Controls_Play@2x.png in Resources */,
 				FAE22DBA1931A1E900F362F7 /* titania.jpg in Resources */,
 				FAE22DAD1931A1E900F362F7 /* io.jpg in Resources */,
 				FAE22DC11931A23600F362F7 /* asteroid_belt.png in Resources */,
+				4C0FED541D5265670005C062 /* Controls_Rewind_Pressed@2x.png in Resources */,
 				FAE22DA81931A1E900F362F7 /* enceladus.jpg in Resources */,
 				FAE22DB51931A1E900F362F7 /* pluto.jpg in Resources */,
 				4CE042FE1D456D180015FE6E /* Carnelian.jpg in Resources */,
@@ -524,15 +599,22 @@
 				FAE22DA61931A1E900F362F7 /* deimos.jpg in Resources */,
 				FAE22DB81931A1E900F362F7 /* tethys.jpg in Resources */,
 				4CE042FA1D456B190015FE6E /* peridoto.jpg in Resources */,
+				4C0FED551D5265670005C062 /* Controls_Rewind.png in Resources */,
 				FA1E89461932F80D0039A4CD /* badges.txt in Resources */,
+				4C0FED5A1D5265670005C062 /* Controls_Skip@2x.png in Resources */,
+				4C0FED581D5265670005C062 /* Controls_Skip_Pressed@2x.png in Resources */,
 				4CE22E9D1D484BE90003655D /* badges2.txt in Resources */,
+				4C0FED4F1D5265670005C062 /* Controls_Pause.png in Resources */,
 				FAE22DB21931A1E900F362F7 /* moon.jpg in Resources */,
+				4C0FED561D5265670005C062 /* Controls_Rewind@2x.png in Resources */,
 				FAE22DB41931A1E900F362F7 /* phobos.jpg in Resources */,
 				FAE22DA71931A1E900F362F7 /* dione.jpg in Resources */,
 				4CE043041D4574FD0015FE6E /* Spinel.jpg in Resources */,
 				4CE22E981D4843150003655D /* bronze.png in Resources */,
+				4C0FED591D5265670005C062 /* Controls_Skip.png in Resources */,
 				FA1F95201929CF2600A0179A /* Main.storyboard in Resources */,
 				4CE043001D456D720015FE6E /* Citrine.jpg in Resources */,
+				4C0FED531D5265670005C062 /* Controls_Rewind_Pressed.png in Resources */,
 				FAE22DB11931A1E900F362F7 /* miranda.jpg in Resources */,
 				4CE043061D4575400015FE6E /* Opal.jpg in Resources */,
 			);
@@ -561,6 +643,8 @@
 				FA1F95261929CF2600A0179A /* PastRunsViewController.m in Sources */,
 				4CDE08051D4A8DA000D77137 /* SettingsViewController.m in Sources */,
 				FAB9AA2F192DD01300FF8E47 /* BadgeDetailsViewController.m in Sources */,
+				4C0FED371D52506F0005C062 /* GVMusicPlayerController.m in Sources */,
+				4C0FED3A1D52509F0005C062 /* NSString+TimeToString.m in Sources */,
 				FA1F951D1929CF2600A0179A /* AppDelegate.m in Sources */,
 				FA24F25519481C6200500593 /* Run.m in Sources */,
 				FA0B80C01939189600CDCA53 /* MulticolorPolylineSegment.m in Sources */,
@@ -693,6 +777,7 @@
 				GCC_PREFIX_HEADER = "MoonRunner/RunMonitor-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "MoonRunner/RunMonitor-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.barrycjulien.RunMonitor;
 				PRODUCT_NAME = RunMonitor;
 				PROVISIONING_PROFILE = "";
@@ -711,6 +796,7 @@
 				GCC_PREFIX_HEADER = "MoonRunner/RunMonitor-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "MoonRunner/RunMonitor-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.barrycjulien.RunMonitor;
 				PRODUCT_NAME = RunMonitor;
 				PROVISIONING_PROFILE = "";

@@ -7,9 +7,11 @@
 //
 
 #import "SettingsViewController.h"
+#import "GVMusicPlayerController.h"
+#import "NSString+TimeToString.h"
 
 
-@interface SettingsViewController ()
+@interface SettingsViewController () <GVMusicPlayerControllerDelegate, MPMediaPickerControllerDelegate>
 
 
 @property (weak, nonatomic) NSString * voiceMileStr;
@@ -316,6 +318,43 @@
     
     
 }
+
+#pragma music settings
+
+- (void)viewWillAppear:(BOOL)animated {
+    // NOTE: add and remove the GVMusicPlayerController delegate in
+    // the viewWillAppear / viewDidDisappear methods, not in the
+    // viewDidLoad / viewDidUnload methods - it will result in dangling
+    // objects in memory.
+    [super viewWillAppear:animated];
+    [[GVMusicPlayerController sharedInstance] addDelegate:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [[GVMusicPlayerController sharedInstance] removeDelegate:self];
+    [super viewDidDisappear:animated];
+}
+
+- (IBAction)chooseButtonPressed {
+    MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
+    picker.delegate = self;
+    picker.allowsPickingMultipleItems = YES;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+#pragma mark - MPMediaPickerControllerDelegate
+
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {
+    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
+    [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:mediaItemCollection];
+    //[[GVMusicPlayerController sharedInstance] play];
+    [[GVMusicPlayerController sharedInstance] pause];
+    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 @end
