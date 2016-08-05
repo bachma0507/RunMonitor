@@ -55,8 +55,9 @@ NSString * const detailSegueName = @"NewRunDetails";
 @property (weak, nonatomic) IBOutlet UILabel *songLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
+@property (weak, nonatomic) IBOutlet UIButton *itunesButton;
 
-//@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 //@property (weak, nonatomic) IBOutlet UISlider *progressSlider;
 //@property (weak, nonatomic) IBOutlet UISlider *volumeSlider;
 //@property (weak, nonatomic) IBOutlet UILabel *trackCurrentPlaybackTimeLabel;
@@ -84,6 +85,8 @@ NSString * const detailSegueName = @"NewRunDetails";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     //[self.view bringSubviewToFront:self.chooseView];
     
 //    self.timerMusic = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timedJob) userInfo:nil repeats:YES];
@@ -108,6 +111,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.nextBadgeImageView.hidden = YES;
     self.progressImageView.hidden = YES;
     self.mapView.hidden = NO;
+    self.itunesButton.hidden = YES;
     
     
     [self startrun];
@@ -157,11 +161,11 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 -(void)playMusic{
     
-    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
-        [[GVMusicPlayerController sharedInstance] pause];
-    } else {
+//    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
+//        [[GVMusicPlayerController sharedInstance] pause];
+//    } else {
         [[GVMusicPlayerController sharedInstance] play];
-    }
+    //}
 }
 
 #pragma mark - IBActions
@@ -182,12 +186,12 @@ NSString * const detailSegueName = @"NewRunDetails";
     [[GVMusicPlayerController sharedInstance] skipToNextItem];
 }
 
-//- (IBAction)chooseButtonPressed {
-//    MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
-//    picker.delegate = self;
-//    picker.allowsPickingMultipleItems = YES;
-//    [self presentViewController:picker animated:YES completion:nil];
-//}
+- (IBAction)chooseButtonPressed {
+    MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
+    picker.delegate = self;
+    picker.allowsPickingMultipleItems = YES;
+    [self presentViewController:picker animated:YES completion:nil];
+}
 //
 //- (IBAction)playEverythingButtonPressed {
 //    MPMediaQuery *query = [MPMediaQuery songsQuery];
@@ -301,10 +305,10 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.artistLabel.text = [nowPlayingItem valueForProperty:MPMediaItemPropertyArtist];
     
     // Artwork
-//    MPMediaItemArtwork *artwork = [nowPlayingItem valueForProperty:MPMediaItemPropertyArtwork];
-//    if (artwork != nil) {
-//        self.imageView.image = [artwork imageWithSize:self.imageView.frame.size];
-//    }
+    MPMediaItemArtwork *artwork = [nowPlayingItem valueForProperty:MPMediaItemPropertyArtwork];
+    if (artwork != nil) {
+        self.imageView.image = [artwork imageWithSize:self.imageView.frame.size];
+    }
     
     NSLog(@"Proof that this code is being called, even in the background!");
 }
@@ -460,7 +464,8 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 - (IBAction)stopPressed:(id)sender
 {
-    NSLog(@"Pace label test:%@", self.paceLabel.text);
+
+            NSLog(@"Pace label test:%@", self.paceLabel.text);
     NSLog(@"Distance label test:%@", self.distLabel.text);
     
     if([self.paceLabel.text isEqualToString:@"Speed: 0"] && [self.distLabel.text isEqualToString:@"Distance: 0.00 mi"]){
@@ -501,6 +506,7 @@ NSString * const detailSegueName = @"NewRunDetails";
         locationObject.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
         [locationArray addObject:locationObject];
     }
+    
     
     newRun.locations = [NSOrderedSet orderedSetWithArray:locationArray];
     self.run = newRun;
