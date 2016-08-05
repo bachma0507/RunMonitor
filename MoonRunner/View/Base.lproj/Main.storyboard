@@ -135,6 +135,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.10000000149011612" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7Z-4C-aYD">
+                                <rect key="frame" x="64" y="336" width="191" height="92"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTl-rF-8Pz">
                                 <rect key="frame" x="82" y="72" width="156" height="30"/>
                                 <state key="normal" title="Mile Marker Voice On"/>
@@ -170,6 +177,12 @@
                                     <action selector="chooseButtonPressed" destination="Psd-Ml-kdD" eventType="touchUpInside" id="3fN-co-RkP"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cloud music and DRM songs not supported at this time." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGg-SN-x2y">
+                                <rect key="frame" x="54" y="375" width="213" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1215686275" green="0.12549019610000001" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -273,6 +286,12 @@
                                     <action selector="stopPressed:" destination="IT2-8f-7aj" eventType="touchUpInside" id="z2J-P7-Wyv"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No run songs were chosen in Settings." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yas-LY-9m6">
+                                <rect key="frame" x="0.0" y="69" width="320" height="59"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMH-Zi-FCg">
                                 <rect key="frame" x="0.0" y="69" width="320" height="59"/>
                                 <subviews>
@@ -332,13 +351,13 @@
                                             <action selector="nextButtonPressed" destination="IT2-8f-7aj" eventType="touchUpInside" id="rld-yA-5qA"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="No artist" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyi-vX-oOy">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyi-vX-oOy">
                                         <rect key="frame" x="19" y="1" width="136" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="No song" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fb7-HC-QEP">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fb7-HC-QEP">
                                         <rect key="frame" x="164" y="1" width="136" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -395,8 +414,10 @@
                         <outlet property="mapView" destination="rbc-Ma-DuU" id="1Wv-yj-aFY"/>
                         <outlet property="nextBadgeImageView" destination="hkN-dO-xP5" id="Ojx-rQ-c7G"/>
                         <outlet property="nextBadgeLabel" destination="EvV-i9-yVx" id="gDw-TP-mD4"/>
+                        <outlet property="norunsongsLabel" destination="Yas-LY-9m6" id="bXh-ec-qYB"/>
                         <outlet property="paceLabel" destination="Hg4-d5-GuQ" id="uY9-O8-VuW"/>
                         <outlet property="playPauseButton" destination="vnV-su-Jfn" id="YiK-Gt-vMf"/>
+                        <outlet property="playerView" destination="HMH-Zi-FCg" id="8h7-dO-oey"/>
                         <outlet property="promptLabel" destination="5Pj-BO-wCG" id="MOb-wA-du5"/>
                         <outlet property="songLabel" destination="Fb7-HC-QEP" id="HgK-q8-Vl8"/>
                         <outlet property="startButton" destination="j9T-f3-Mx1" id="gSL-tH-0a9"/>

@@ -68,6 +68,8 @@ NSString * const detailSegueName = @"NewRunDetails";
 @property (strong, nonatomic) NSTimer *timerMusic;
 @property BOOL panningProgress;
 @property BOOL panningVolume;
+@property (weak, nonatomic) IBOutlet UIView *playerView;
+@property (weak, nonatomic) IBOutlet UILabel *norunsongsLabel;
 
 @property (strong, nonatomic) NSArray *objects;
 //@property (nonatomic, strong) NSString *voiceMileValueStr;
@@ -113,10 +115,21 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.mapView.hidden = NO;
     self.itunesButton.hidden = YES;
     
-    
     [self startrun];
     
     [self playMusic];
+    
+    NSLog(@"SONG LABEL TEXT IS: %@", self.songLabel.text);
+    
+    if(self.songLabel.text == NULL){
+        
+        self.playerView.hidden = YES;
+    }
+    else{
+        
+        self.norunsongsLabel.hidden = YES;
+    }
+    
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -303,6 +316,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     // Labels
     self.songLabel.text = [nowPlayingItem valueForProperty:MPMediaItemPropertyTitle];
     self.artistLabel.text = [nowPlayingItem valueForProperty:MPMediaItemPropertyArtist];
+    
     
     // Artwork
     MPMediaItemArtwork *artwork = [nowPlayingItem valueForProperty:MPMediaItemPropertyArtwork];
