@@ -351,8 +351,31 @@
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
     [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:mediaItemCollection];
     //[[GVMusicPlayerController sharedInstance] play];
+    [self savePlaylist:mediaItemCollection];
     [[GVMusicPlayerController sharedInstance] pause];
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)savePlaylist:(MPMediaItemCollection *) mediaItemCollection {
+    
+    NSArray* items = [mediaItemCollection items];
+    
+    NSMutableArray* listToSave = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (MPMediaItem *song in items) {
+        
+        NSNumber *persistentId = [song valueForProperty:MPMediaItemPropertyPersistentID];
+        
+        [listToSave addObject:persistentId];
+        
+    }
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: listToSave];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"songsList"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 

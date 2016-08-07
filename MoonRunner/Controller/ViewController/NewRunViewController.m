@@ -177,8 +177,44 @@ NSString * const detailSegueName = @"NewRunDetails";
 //    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
 //        [[GVMusicPlayerController sharedInstance] pause];
 //    } else {
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"songsList"] != nil) {
+        
+        NSMutableArray *theList = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"songsList"];
+        
+        NSArray *decodedData = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
+        [theList addObjectsFromArray:decodedData];
+        
+        NSMutableArray *allTheSongs = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        for (int i = 0; i < [theList count]; i++) {
+            
+            MPMediaQuery *songQuery = [MPMediaQuery songsQuery];
+            
+            [songQuery addFilterPredicate:[MPMediaPropertyPredicate predicateWithValue:[theList objectAtIndex:i] forProperty:MPMediaItemPropertyPersistentID]];
+            
+            NSArray *songs = [songQuery items];
+            
+            [allTheSongs addObjectsFromArray: songs];
+            
+        }
+        
+        NSLog(@"ALLTHESONGS ARRAY COUNT: %lu", (unsigned long)allTheSongs.count);
+        
+        MPMediaItemCollection *currentQueue = [[MPMediaItemCollection alloc] initWithItems:allTheSongs];
+        
+        [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:currentQueue];
+        
         [[GVMusicPlayerController sharedInstance] play];
-    //}
+        
+    }
+    else{
+    
+        [[GVMusicPlayerController sharedInstance] play];
+    }
 }
 
 #pragma mark - IBActions
@@ -339,15 +375,38 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 #pragma mark - MPMediaPickerControllerDelegate
 
-- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {
-    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
-    [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:mediaItemCollection];
-    [[GVMusicPlayerController sharedInstance] play];
-    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)savePlaylist:(MPMediaItemCollection *) mediaItemCollection {
+//    
+//    NSArray* items = [mediaItemCollection items];
+//    
+//    NSMutableArray* listToSave = [[NSMutableArray alloc] initWithCapacity:0];
+//    
+//    for (MPMediaItem *song in items) {
+//        
+//        NSNumber *persistentId = [song valueForProperty:MPMediaItemPropertyPersistentID];
+//        
+//        [listToSave addObject:persistentId];
+//        
+//    }
+//    
+//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: listToSave];
+//    
+//    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"songsList"];
+//    
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//}
+//
+//- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {
+//    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//- (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
+//    [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:mediaItemCollection];
+//    //[[GVMusicPlayerController sharedInstance] play];
+//    [self savePlaylist:mediaItemCollection];
+//    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
+//}
 
 
 
@@ -521,7 +580,23 @@ NSString * const detailSegueName = @"NewRunDetails";
         [locationArray addObject:locationObject];
     }
     
+    NSLog(@"locationArray counts is: %lu", (unsigned long)locationArray.count);
     
+    if (locationArray.count <= 2){
+        
+        [self.locationManager stopUpdatingLocation];
+        [self.timer invalidate];
+        //[locationArray removeAllObjects];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!"
+                                                            message:@"There was a problem pinpointing your location on the map. Please try again."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil, nil];
+        alertView.tag = 1;
+        [alertView show];
+    }
+    else{
     newRun.locations = [NSOrderedSet orderedSetWithArray:locationArray];
     self.run = newRun;
     
@@ -531,7 +606,22 @@ NSString * const detailSegueName = @"NewRunDetails";
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+        [self performSegueWithIdentifier:detailSegueName sender:nil];
+    }
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
+    //u need to change 0 to other value(,1,2,3) if u have more buttons.then u can check which button was pressed.
+    if (alertView.tag ==1) {
+        
+        if (buttonIndex == 0) {
+            
+            [[GVMusicPlayerController sharedInstance] stop];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }
+    }
 }
 
 - (void)eachSecond
@@ -867,6 +957,7 @@ else{
         [self.locationManager requestWhenInUseAuthorization];
     }
     [self.locationManager startUpdatingLocation];
+    
 }
 
 
@@ -893,7 +984,7 @@ else{
     if (buttonIndex == 0) {
         [[GVMusicPlayerController sharedInstance] stop];
         [self saveRun];
-        [self performSegueWithIdentifier:detailSegueName sender:nil];
+        //[self performSegueWithIdentifier:detailSegueName sender:nil];
         
     // discard
     } else if (buttonIndex == 1) {

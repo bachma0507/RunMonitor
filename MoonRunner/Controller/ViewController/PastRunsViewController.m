@@ -8,11 +8,21 @@
 
 @interface PastRunsViewController ()
 
+
 @end
 
 @implementation PastRunsViewController
 
 #pragma mark - Table View
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    //[myTableView reloadData];
+    
+    
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -29,6 +39,10 @@
     cell.dateLabel.text = [formatter stringFromDate:runObject.timestamp];
     
     cell.distanceLabel.text = [MathController stringifyDistance:runObject.distance.floatValue];
+    
+    NSLog(@"runObject distance value is: %f", runObject.distance.floatValue);
+    
+    
     
     Badge *badge = [[BadgeController defaultController] bestBadgeForDistance:runObject.distance.floatValue];
     cell.badgeImageView.image = [UIImage imageNamed:badge.imageName];
