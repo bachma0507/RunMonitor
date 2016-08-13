@@ -779,7 +779,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "MoonRunner/RunMonitor-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.barrycjulien.RunMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.barrycjulien.runmon;
 				PRODUCT_NAME = RunMonitor;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -798,7 +798,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "MoonRunner/RunMonitor-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.barrycjulien.RunMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.barrycjulien.runmon;
 				PRODUCT_NAME = RunMonitor;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

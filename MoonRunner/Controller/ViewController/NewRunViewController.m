@@ -31,7 +31,6 @@ NSString * const detailSegueName = @"NewRunDetails";
     double totalMiles;
 }
 
-@property (assign) BOOL siriDidUtter;
 
 @property int seconds;
 @property float distance;
@@ -172,6 +171,8 @@ NSString * const detailSegueName = @"NewRunDetails";
     [[GVMusicPlayerController sharedInstance] remoteControlReceivedWithEvent:receivedEvent];
 }
 
+
+
 -(void)playMusic{
     
 //    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
@@ -240,6 +241,11 @@ NSString * const detailSegueName = @"NewRunDetails";
     picker.delegate = self;
     picker.allowsPickingMultipleItems = YES;
     [self presentViewController:picker animated:YES completion:nil];
+}
+
+-(void) playAfterPause{
+    
+    [[GVMusicPlayerController sharedInstance] play];
 }
 //
 //- (IBAction)playEverythingButtonPressed {
@@ -652,6 +658,25 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.progressImageView.frame = newRect;
 }
 
+
+
+- (void)setAudioSessionWithDucking:(BOOL)isDucking
+{
+    AudioSessionSetActive(NO);
+    
+    UInt32 overrideCategoryDefaultToSpeaker = 1;
+    AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof (overrideCategoryDefaultToSpeaker), &overrideCategoryDefaultToSpeaker);
+    
+    UInt32 overrideCategoryMixWithOthers = 1;
+    AudioSessionSetProperty (kAudioSessionProperty_OverrideCategoryMixWithOthers, sizeof (overrideCategoryMixWithOthers), &overrideCategoryMixWithOthers);
+    
+    UInt32 value = isDucking;
+    AudioSessionSetProperty(kAudioSessionProperty_OtherMixableAudioShouldDuck, sizeof(value), &value);
+    
+    AudioSessionSetActive(YES);
+}
+
+
 - (void)updateLabels
 {
     
@@ -704,7 +729,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     //NSLog(@"TIME VALUE IN MINUTES: %f", mins);
     //NSLog(@"VALUE OF SPEED: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
     //NSLog(@"VALUE OF SPEED MINUTES: %@", mySpeed);
-    if(fmod(mins,1) == 0){
+    if(fmod(mins,5) == 0){
         
         if(self.seconds < 3600){
             
@@ -715,7 +740,13 @@ NSString * const detailSegueName = @"NewRunDetails";
             
             NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES %@ SECONDS! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", fiveMinuteTime, timeTrunc3begin,[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
             
-            
+            [[GVMusicPlayerController sharedInstance] pause];
+            //[self setAudioSessionWithDucking:YES];
+            [NSTimer scheduledTimerWithTimeInterval:12.0
+                                             target:self
+                                           selector:@selector(playAfterPause)
+                                           userInfo:nil
+                                            repeats:NO];
             
             AVSpeechUtterance *utterance = [AVSpeechUtterance
                                             speechUtteranceWithString:newText];
@@ -734,10 +765,21 @@ NSString * const detailSegueName = @"NewRunDetails";
             
             
         }else{
+            
+            
+            
         NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES %@ SECONDS! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", timeTrunc3, timeTrunc3begin,[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
         
         NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", timeTrunc3, timeTrunc3begin,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
         
+            [[GVMusicPlayerController sharedInstance] pause];
+            //[self setAudioSessionWithDucking:YES];
+            [NSTimer scheduledTimerWithTimeInterval:12.0
+                                             target:self
+                                           selector:@selector(playAfterPause)
+                                           userInfo:nil
+                                            repeats:NO];
+            
             
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:newText];
@@ -752,6 +794,8 @@ NSString * const detailSegueName = @"NewRunDetails";
             
         [synth speakUtterance:utterance];
             
+            //[self setAudioSessionWithDucking:NO];
+            //[[GVMusicPlayerController sharedInstance] play];
       
             }
     }
@@ -767,6 +811,13 @@ NSString * const detailSegueName = @"NewRunDetails";
             
             NSString * newTextHour = [[NSString alloc] initWithFormat:@"Time %@ hours %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", timeTruncHour, timeTruncMin, timeTruncSec,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
             
+            [[GVMusicPlayerController sharedInstance] pause];
+            //[self setAudioSessionWithDucking:YES];
+            [NSTimer scheduledTimerWithTimeInterval:12.0
+                                             target:self
+                                           selector:@selector(playAfterPause)
+                                           userInfo:nil
+                                            repeats:NO];
             
             AVSpeechUtterance *utterance = [AVSpeechUtterance
                                             speechUtteranceWithString:newTextHour];
@@ -811,6 +862,14 @@ NSString * const detailSegueName = @"NewRunDetails";
         
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level white. Get to 5 miles to reach badge level bronze.", [MathController stringifyDistance:self.distance]];
         
+        [[GVMusicPlayerController sharedInstance] pause];
+        //[self setAudioSessionWithDucking:YES];
+        [NSTimer scheduledTimerWithTimeInterval:12.0
+                                         target:self
+                                       selector:@selector(playAfterPause)
+                                       userInfo:nil
+                                        repeats:NO];
+        
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:mileText];
         AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
@@ -826,6 +885,15 @@ NSString * const detailSegueName = @"NewRunDetails";
     else if([[MathController stringifyDistance:self.distance] isEqualToString:@"5.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"6.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"7.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"8.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"9.00 mi"]){
         
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level bronze. Get to 10 miles to reach badge level silver.", [MathController stringifyDistance:self.distance]];
+        
+        
+        [[GVMusicPlayerController sharedInstance] pause];
+        //[self setAudioSessionWithDucking:YES];
+        [NSTimer scheduledTimerWithTimeInterval:12.0
+                                         target:self
+                                       selector:@selector(playAfterPause)
+                                       userInfo:nil
+                                        repeats:NO];
         
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:mileText];
@@ -843,6 +911,15 @@ NSString * const detailSegueName = @"NewRunDetails";
         
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level silver. Get to 15 miles to reach badge level gold.", [MathController stringifyDistance:self.distance]];
         
+        
+        [[GVMusicPlayerController sharedInstance] pause];
+        //[self setAudioSessionWithDucking:YES];
+        [NSTimer scheduledTimerWithTimeInterval:12.0
+                                         target:self
+                                       selector:@selector(playAfterPause)
+                                       userInfo:nil
+                                        repeats:NO];
+        
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:mileText];
         AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
@@ -859,6 +936,15 @@ NSString * const detailSegueName = @"NewRunDetails";
         
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level gold. Get to 20 miles to reach badge level royal purple.", [MathController stringifyDistance:self.distance]];
         
+        
+        [[GVMusicPlayerController sharedInstance] pause];
+        //[self setAudioSessionWithDucking:YES];
+        [NSTimer scheduledTimerWithTimeInterval:12.0
+                                         target:self
+                                       selector:@selector(playAfterPause)
+                                       userInfo:nil
+                                        repeats:NO];
+        
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:mileText];
         AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
@@ -874,6 +960,16 @@ NSString * const detailSegueName = @"NewRunDetails";
     else if([[MathController stringifyDistance:self.distance] isEqualToString:@"20.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"21.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"22.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"23.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"24.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"25.00 mi"]){
         
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level royal purple. You have reached the highest badge level.", [MathController stringifyDistance:self.distance]];
+        
+        
+        [[GVMusicPlayerController sharedInstance] pause];
+        //[self setAudioSessionWithDucking:YES];
+        [NSTimer scheduledTimerWithTimeInterval:12.0
+                                         target:self
+                                       selector:@selector(playAfterPause)
+                                       userInfo:nil
+                                        repeats:NO];
+        
         
         AVSpeechUtterance *utterance = [AVSpeechUtterance
                                         speechUtteranceWithString:mileText];
