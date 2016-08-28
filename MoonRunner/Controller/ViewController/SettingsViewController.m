@@ -12,6 +12,9 @@
 
 
 @interface SettingsViewController () <GVMusicPlayerControllerDelegate, MPMediaPickerControllerDelegate>
+{
+    MPMusicPlayerController* myPlayer;
+}
 
 
 @property (weak, nonatomic) NSString * voiceMileStr;
@@ -24,6 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    myPlayer = [MPMusicPlayerController applicationMusicPlayer];
     
     
     [self fetchVoiceMile];
@@ -349,11 +354,18 @@
 }
 
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
-    [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:mediaItemCollection];
+    [myPlayer setQueueWithItemCollection:mediaItemCollection];
     //[[GVMusicPlayerController sharedInstance] play];
     [self savePlaylist:mediaItemCollection];
-    [[GVMusicPlayerController sharedInstance] pause];
+    [myPlayer pause];
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
+    
+    
+//    [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:mediaItemCollection];
+//    //[[GVMusicPlayerController sharedInstance] play];
+//    [self savePlaylist:mediaItemCollection];
+//    [[GVMusicPlayerController sharedInstance] pause];
+//    [mediaPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)savePlaylist:(MPMediaItemCollection *) mediaItemCollection {

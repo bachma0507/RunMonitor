@@ -29,6 +29,8 @@ NSString * const detailSegueName = @"NewRunDetails";
     double pastMiles;
     double currentMiles;
     double totalMiles;
+    MPMusicPlayerController* myPlayer;
+    
 }
 
 
@@ -86,7 +88,36 @@ NSString * const detailSegueName = @"NewRunDetails";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    myPlayer = [MPMusicPlayerController applicationMusicPlayer];
     
+    [self registerMediaPlayerNotifications];
+    
+    //[self startrun];
+    
+    //[self playMusic];
+    
+    
+    
+//    NSLog(@"SONG LABEL TEXT IS: %@", self.songLabel.text);
+//    
+//    if([self.songLabel.text  isEqual: @""]){
+//        
+//        self.playerView.hidden = YES;
+//    }
+//    else{
+//        
+//        self.norunsongsLabel.hidden = YES;
+//    }
+    
+//    if ([myPlayer playbackState] == MPMusicPlaybackStatePlaying) {
+//        
+//        [self.playPauseButton setImage:[UIImage imageNamed:@"Controls_Pause.png"] forState:UIControlStateNormal];
+//        
+//    } else {
+//        
+//        [self.playPauseButton setImage:[UIImage imageNamed:@"Controls_Play.png"] forState:UIControlStateNormal];
+//    }
+
     
     //[self.view bringSubviewToFront:self.chooseView];
     
@@ -113,20 +144,113 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.progressImageView.hidden = YES;
     self.mapView.hidden = NO;
     self.itunesButton.hidden = YES;
+    self.norunsongsLabel.hidden = YES;
     
     [self startrun];
     
     [self playMusic];
     
+//    NSLog(@"SONG LABEL TEXT IS: %@", self.songLabel.text);
+//    
+//    if(self.songLabel.text == NULL || [self.songLabel.text isEqualToString:@""]){
+//        
+//        self.playerView.hidden = YES;
+//    }
+//    else{
+//        
+//        self.norunsongsLabel.hidden = YES;
+//    }
+
+    if ([myPlayer playbackState] == MPMusicPlaybackStatePlaying) {
+        
+        [self.playPauseButton setImage:[UIImage imageNamed:@"Controls_Pause.png"] forState:UIControlStateNormal];
+        
+    } else {
+        
+        [self.playPauseButton setImage:[UIImage imageNamed:@"Controls_Play.png"] forState:UIControlStateNormal];
+    }
+    
+}
+
+- (void) registerMediaPlayerNotifications
+{
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    [notificationCenter addObserver: self
+                           selector: @selector (handle_NowPlayingItemChanged:)
+                               name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
+                             object: myPlayer];
+    
+    [notificationCenter addObserver: self
+                           selector: @selector (handle_PlaybackStateChanged:)
+                               name: MPMusicPlayerControllerPlaybackStateDidChangeNotification
+                             object: myPlayer];
+    
+//    [notificationCenter addObserver: self
+//                           selector: @selector (handle_VolumeChanged:)
+//                               name: MPMusicPlayerControllerVolumeDidChangeNotification
+//                             object: myPlayer];
+    
+    [myPlayer beginGeneratingPlaybackNotifications];
+}
+
+- (void) handle_NowPlayingItemChanged: (id) notification
+{
+    MPMediaItem *currentItem = [myPlayer nowPlayingItem];
+    //UIImage *artworkImage = [UIImage imageNamed:@"noArtworkImage.png"];
+    MPMediaItemArtwork *artwork = [currentItem valueForProperty: MPMediaItemPropertyArtwork];
+    if (artwork != nil) {
+                    self.imageView.image = [artwork imageWithSize:self.imageView.frame.size];
+                }
+    
+    
+    //self.songLabel.text = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyTitle];
+    //self.artistLabel.text = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyArtist];
+    
+    NSString *titleString = [currentItem valueForProperty:MPMediaItemPropertyTitle];
+    if (titleString) {
+        self.songLabel.text = titleString;
+    } else {
+        self.songLabel.text = @"No Title";
+    }
     NSLog(@"SONG LABEL TEXT IS: %@", self.songLabel.text);
     
-    if(self.songLabel.text == NULL){
-        
-        self.playerView.hidden = YES;
+    
+    NSString *artistString = [currentItem valueForProperty:MPMediaItemPropertyArtist];
+    if (artistString) {
+        self.artistLabel.text = artistString;
+    } else {
+        self.artistLabel.text = @"No Artist";
     }
-    else{
+    NSLog(@"SONG ARTIST TEXT IS: %@", self.artistLabel.text);
+    
+    if([self.songLabel.text isEqualToString:@"No Title"] && [self.artistLabel.text isEqualToString:@"No Artist"]){
+        //
+                self.playerView.hidden = YES;
+        //    }
+        //    else{
+        //
+                self.norunsongsLabel.hidden = NO;
+        //    }
+    }
+    
+}
+
+- (void) handle_PlaybackStateChanged: (id) notification
+{
+    MPMusicPlaybackState playbackState = [myPlayer playbackState];
+    
+    if (playbackState == MPMusicPlaybackStatePaused) {
+        [self.playPauseButton setImage:[UIImage imageNamed:@"Controls_Play.png"] forState:UIControlStateNormal];
         
-        self.norunsongsLabel.hidden = YES;
+    } else if (playbackState == MPMusicPlaybackStatePlaying) {
+        [self.playPauseButton setImage:[UIImage imageNamed:@"Controls_Pause.png"] forState:UIControlStateNormal];
+        
+    } else if (playbackState == MPMusicPlaybackStateStopped) {
+        
+        [self.playPauseButton setImage:[UIImage imageNamed:@"Controls_Play.png"] forState:UIControlStateNormal];
+        [myPlayer stop];
+        
     }
     
 }
@@ -145,6 +269,7 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 - (void)viewDidDisappear:(BOOL)animated {
     [[GVMusicPlayerController sharedInstance] removeDelegate:self];
+    [myPlayer stop];
     [super viewDidDisappear:animated];
 }
 
@@ -175,9 +300,9 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 -(void)playMusic{
     
-//    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
-//        [[GVMusicPlayerController sharedInstance] pause];
-//    } else {
+    //    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
+    //        [[GVMusicPlayerController sharedInstance] pause];
+    //    } else {
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"songsList"] != nil) {
         
@@ -207,33 +332,67 @@ NSString * const detailSegueName = @"NewRunDetails";
         
         MPMediaItemCollection *currentQueue = [[MPMediaItemCollection alloc] initWithItems:allTheSongs];
         
-        [[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:currentQueue];
         
-        [[GVMusicPlayerController sharedInstance] play];
+        [myPlayer setQueueWithItemCollection:currentQueue];
+        [myPlayer play];
+        //        self.songLabel.text = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyTitle];
+        //        self.artistLabel.text = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyArtist];
+        //
+        //
+        //         //Artwork
+        //        MPMediaItemArtwork *artwork = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyArtwork];
+        //        if (artwork != nil) {
+        //            self.imageView.image = [artwork imageWithSize:self.imageView.frame.size];
+        //        }
+        
+        //[[GVMusicPlayerController sharedInstance] setQueueWithItemCollection:currentQueue];
+        
+        //[[GVMusicPlayerController sharedInstance] play];
         
     }
     else{
-    
-        [[GVMusicPlayerController sharedInstance] play];
+        
+        //[[GVMusicPlayerController sharedInstance] play];
+        [myPlayer play];
+        //        self.songLabel.text = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyTitle];
+        //        self.artistLabel.text = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyArtist];
+        //
+        //
+        //        // Artwork
+        //        MPMediaItemArtwork *artwork = [myPlayer.nowPlayingItem valueForProperty:MPMediaItemPropertyArtwork];
+        //        if (artwork != nil) {
+        //            self.imageView.image = [artwork imageWithSize:self.imageView.frame.size];
+        //        }
+        
     }
 }
 
 #pragma mark - IBActions
 
 - (IBAction)playButtonPressed {
-    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
-        [[GVMusicPlayerController sharedInstance] pause];
+    if (myPlayer.playbackState == MPMusicPlaybackStatePlaying) {
+        [myPlayer pause];
     } else {
-        [[GVMusicPlayerController sharedInstance] play];
+        [myPlayer play];
     }
+    
+    
+//    if ([GVMusicPlayerController sharedInstance].playbackState == MPMusicPlaybackStatePlaying) {
+//        [[GVMusicPlayerController sharedInstance] pause];
+//    } else {
+//        [[GVMusicPlayerController sharedInstance] play];
+//    }
 }
 
 - (IBAction)prevButtonPressed {
-    [[GVMusicPlayerController sharedInstance] skipToPreviousItem];
+    //[[GVMusicPlayerController sharedInstance] skipToPreviousItem];
+    [myPlayer skipToPreviousItem];
 }
 
 - (IBAction)nextButtonPressed {
-    [[GVMusicPlayerController sharedInstance] skipToNextItem];
+    //[[GVMusicPlayerController sharedInstance] skipToNextItem];
+    [myPlayer skipToNextItem];
+    
 }
 
 - (IBAction)chooseButtonPressed {
@@ -245,7 +404,9 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 -(void) playAfterPause{
     
-    [[GVMusicPlayerController sharedInstance] play];
+    //[[GVMusicPlayerController sharedInstance] play];
+    [myPlayer play];
+
 }
 //
 //- (IBAction)playEverythingButtonPressed {
@@ -341,7 +502,12 @@ NSString * const detailSegueName = @"NewRunDetails";
     self.playPauseButton.selected = (playbackState == MPMusicPlaybackStatePlaying);
 }
 
+//- (void)musicPlayer:myPlayer playbackStateChanged:(MPMusicPlaybackState)playbackState previousPlaybackState:(MPMusicPlaybackState)previousPlaybackState {
+//    self.playPauseButton.selected = (playbackState == MPMusicPlaybackStatePlaying);
+//}
+
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer trackDidChange:(MPMediaItem *)nowPlayingItem previousTrack:(MPMediaItem *)previousTrack {
+//- (void)musicPlayer:(MPMusicPlayerController *)myPlayer trackDidChange:(MPMediaItem *)nowPlayingItem previousTrack:(MPMediaItem *)previousTrack {
 //    if (!nowPlayingItem) {
 //        self.chooseView.hidden = NO;
 //        return;
@@ -369,6 +535,9 @@ NSString * const detailSegueName = @"NewRunDetails";
     NSLog(@"Proof that this code is being called, even in the background!");
 }
 
+//- (void)musicPlayer:(MPMusicPlayerController *)musicPlayer endOfQueueReached:(MPMediaItem *)lastTrack {
+//    NSLog(@"End of queue, but last track was %@", [lastTrack valueForProperty:MPMediaItemPropertyTitle]);
+//}
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer endOfQueueReached:(MPMediaItem *)lastTrack {
     NSLog(@"End of queue, but last track was %@", [lastTrack valueForProperty:MPMediaItemPropertyTitle]);
 }
@@ -418,44 +587,44 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 -(void) startrun{
     
-//     NSManagedObject *newVoice = [NSEntityDescription insertNewObjectForEntityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
-//    
-//    NSString *voiceMileStr = @"no";
-//    
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//    // Edit the entity name as appropriate.
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
-//    [fetchRequest setEntity:entity];
-//    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'no' || voicemile == 'yes'"]];
-//    
-//    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
-//    
-//    self.objects = results;
-//    
-//    if (!results || !results.count){
-//        NSLog(@"NO RESULTS FOR VOICEMILE IN MANAGEDOBJECTCONTEXT");
-//        [newVoice setValue:voiceMileStr forKey:@"voicemile"];
-//        
-//        // Save the context.
-//        NSError *error = nil;
-//        if (![self.managedObjectContext save:&error]) {
-//            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//            abort();
-//        }
-//
-//    }
-//    else{
-//        NSManagedObject *object = [results objectAtIndex:0];
-//        [object setValue:voiceMileStr forKey:@"voicemile"];
-//        
-//        NSError *error = nil;
-//        // Save the object to persistent store
-//        if (![self.managedObjectContext save:&error]) {
-//            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-//        }
-//        
-//    }
-
+    //     NSManagedObject *newVoice = [NSEntityDescription insertNewObjectForEntityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+    //
+    //    NSString *voiceMileStr = @"no";
+    //
+    //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    //    // Edit the entity name as appropriate.
+    //    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
+    //    [fetchRequest setEntity:entity];
+    //    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'no' || voicemile == 'yes'"]];
+    //
+    //    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    //
+    //    self.objects = results;
+    //
+    //    if (!results || !results.count){
+    //        NSLog(@"NO RESULTS FOR VOICEMILE IN MANAGEDOBJECTCONTEXT");
+    //        [newVoice setValue:voiceMileStr forKey:@"voicemile"];
+    //
+    //        // Save the context.
+    //        NSError *error = nil;
+    //        if (![self.managedObjectContext save:&error]) {
+    //            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    //            abort();
+    //        }
+    //
+    //    }
+    //    else{
+    //        NSManagedObject *object = [results objectAtIndex:0];
+    //        [object setValue:voiceMileStr forKey:@"voicemile"];
+    //
+    //        NSError *error = nil;
+    //        // Save the object to persistent store
+    //        if (![self.managedObjectContext save:&error]) {
+    //            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    //        }
+    //
+    //    }
+    
     
     
     UIBackgroundTaskIdentifier bgTask;
@@ -477,20 +646,20 @@ NSString * const detailSegueName = @"NewRunDetails";
     if (!results || !results.count){ //begin if no results
         
         
-            
-            NSString *startText = [[NSString alloc]initWithFormat:@"Run started."];
-            
-            AVSpeechUtterance *utterance = [AVSpeechUtterance
-                                            speechUtteranceWithString:startText];
-            AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
-            
-            utterance.rate = 0.45;
-            utterance.pitchMultiplier = 0.95;
-            utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
-            utterance.volume = 0.75;
-            
-            [synth speakUtterance:utterance];
-            
+        
+        NSString *startText = [[NSString alloc]initWithFormat:@"Run started."];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance
+                                        speechUtteranceWithString:startText];
+        AVSpeechSynthesizer *synth = [[AVSpeechSynthesizer alloc] init];
+        
+        utterance.rate = 0.45;
+        utterance.pitchMultiplier = 0.95;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+        utterance.volume = 0.75;
+        
+        [synth speakUtterance:utterance];
+        
         
     }
     else{
@@ -543,8 +712,8 @@ NSString * const detailSegueName = @"NewRunDetails";
 
 - (IBAction)stopPressed:(id)sender
 {
-
-            NSLog(@"Pace label test:%@", self.paceLabel.text);
+    
+    NSLog(@"Pace label test:%@", self.paceLabel.text);
     NSLog(@"Distance label test:%@", self.distLabel.text);
     
     if([self.paceLabel.text isEqualToString:@"Speed: 0"] && [self.distLabel.text isEqualToString:@"Distance: 0.00 mi"]){
@@ -555,11 +724,11 @@ NSString * const detailSegueName = @"NewRunDetails";
         
     }
     else{
-    
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Save", @"Discard", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    [actionSheet showInView:self.view];
+        
+        
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Save", @"Discard", nil];
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        [actionSheet showInView:self.view];
     }
 }
 
@@ -603,15 +772,15 @@ NSString * const detailSegueName = @"NewRunDetails";
         [alertView show];
     }
     else{
-    newRun.locations = [NSOrderedSet orderedSetWithArray:locationArray];
-    self.run = newRun;
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![self.managedObjectContext save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+        newRun.locations = [NSOrderedSet orderedSetWithArray:locationArray];
+        self.run = newRun;
+        
+        // Save the context.
+        NSError *error = nil;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
         [self performSegueWithIdentifier:detailSegueName sender:nil];
     }
 }
