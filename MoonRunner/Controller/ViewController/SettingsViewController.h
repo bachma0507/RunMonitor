@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *startRunButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopRunButton;
 
+
+
 - (IBAction)mileMarkerButtonPressed:(id)sender;
 - (IBAction)minuteMarkerButtonPressed:(id)sender;
 - (IBAction)startRunButtonPressed:(id)sender;

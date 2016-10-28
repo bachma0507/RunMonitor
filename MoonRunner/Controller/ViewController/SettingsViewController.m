@@ -11,6 +11,7 @@
 #import "NSString+TimeToString.h"
 
 
+
 @interface SettingsViewController () <GVMusicPlayerControllerDelegate, MPMediaPickerControllerDelegate>
 {
     MPMusicPlayerController* myPlayer;
@@ -28,14 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    myPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    myPlayer = [MPMusicPlayerController iPodMusicPlayer];
     
     
     [self fetchVoiceMile];
     [self fetchVoiceMin];
     [self fetchVoiceStart];
     [self fetchVoicestop];
-
+    
+   
     
 }
 
@@ -389,6 +391,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
+
 
 
 

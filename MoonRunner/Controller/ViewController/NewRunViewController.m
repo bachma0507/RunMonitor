@@ -30,7 +30,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     double currentMiles;
     double totalMiles;
     MPMusicPlayerController* myPlayer;
-    
+    AVAudioPlayer *_audioPlayer;
 }
 
 
@@ -88,7 +88,14 @@ NSString * const detailSegueName = @"NewRunDetails";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    myPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    // Construct URL to sound file
+    NSString *path = [NSString stringWithFormat:@"%@/1sec.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    
+    // Create audio player object and initialize with URL to sound
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+    
+    myPlayer = [MPMusicPlayerController iPodMusicPlayer];
     
     [self registerMediaPlayerNotifications];
     
@@ -845,10 +852,25 @@ NSString * const detailSegueName = @"NewRunDetails";
     AudioSessionSetActive(YES);
 }
 
+-(void)ActivateAudioSession
+{
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionDuckOthers error:nil];
+    //[session setCategory:AVAudioSessionCategory.Playback];
+     [session setActive:YES error:nil];
+}
+
+-(void)DeActivateAudioSession
+{
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    //[session setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionDuckOthers error:nil];
+    //[session setCategory:AVAudioSessionCategory.Playback];
+    [session setActive:NO error:nil];
+}
+
 
 - (void)updateLabels
 {
-    
     
     self.timeLabel.text = [NSString stringWithFormat:@"Time: %@",  [MathController stringifySecondCount:self.seconds usingLongFormat:NO]];
     NSLog(@"TIME IS: %@", [MathController stringifySecondCount:self.seconds usingLongFormat:NO]);
@@ -898,7 +920,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     //NSLog(@"TIME VALUE IN MINUTES: %f", mins);
     //NSLog(@"VALUE OF SPEED: %@", [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds]);
     //NSLog(@"VALUE OF SPEED MINUTES: %@", mySpeed);
-    if(fmod(mins,5) == 0){
+    if(fmod(mins,1) == 0){
         
         if(self.seconds < 3600){
             
@@ -909,13 +931,16 @@ NSString * const detailSegueName = @"NewRunDetails";
             
             NSLog(@"YOU HAVE BEEN RUNNING FOR %@ MINUTES %@ SECONDS! AND YOUR DISTANCE COVERED IS %@, AND YOUR SPEED IS %@", fiveMinuteTime, timeTrunc3begin,[MathController stringifyDistance:self.distance], [MathController stringifyAvgPaceFromDist:self.distance overTime:self.seconds] );
             
-            [[GVMusicPlayerController sharedInstance] pause];
+            //[[GVMusicPlayerController sharedInstance] pause];
+            //[myPlayer pause];
+            //[_audioPlayer play];
             //[self setAudioSessionWithDucking:YES];
-            [NSTimer scheduledTimerWithTimeInterval:12.0
-                                             target:self
-                                           selector:@selector(playAfterPause)
-                                           userInfo:nil
-                                            repeats:NO];
+            [self ActivateAudioSession];
+//            [NSTimer scheduledTimerWithTimeInterval:12.0
+//                                             target:self
+//                                           selector:@selector(playAfterPause)
+//                                           userInfo:nil
+//                                            repeats:NO];
             
             AVSpeechUtterance *utterance = [AVSpeechUtterance
                                             speechUtteranceWithString:newText];
@@ -931,7 +956,8 @@ NSString * const detailSegueName = @"NewRunDetails";
             
             [synth speakUtterance:utterance];
             
-            
+            //[self setAudioSessionWithDucking:NO];
+            [self DeActivateAudioSession];
             
         }else{
             
@@ -941,13 +967,17 @@ NSString * const detailSegueName = @"NewRunDetails";
         
         NSString * newText = [[NSString alloc] initWithFormat:@"Time %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", timeTrunc3, timeTrunc3begin,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
         
-            [[GVMusicPlayerController sharedInstance] pause];
+            //[[GVMusicPlayerController sharedInstance] pause];
+            //[myPlayer pause];
+            //[_audioPlayer play];
             //[self setAudioSessionWithDucking:YES];
-            [NSTimer scheduledTimerWithTimeInterval:12.0
-                                             target:self
-                                           selector:@selector(playAfterPause)
-                                           userInfo:nil
-                                            repeats:NO];
+            [self ActivateAudioSession];
+            
+//            [NSTimer scheduledTimerWithTimeInterval:12.0
+//                                             target:self
+//                                           selector:@selector(playAfterPause)
+//                                           userInfo:nil
+//                                            repeats:NO];
             
             
         AVSpeechUtterance *utterance = [AVSpeechUtterance
@@ -963,7 +993,8 @@ NSString * const detailSegueName = @"NewRunDetails";
             
         [synth speakUtterance:utterance];
             
-            //[self setAudioSessionWithDucking:NO];
+            [self DeActivateAudioSession];
+                        //[self setAudioSessionWithDucking:NO];
             //[[GVMusicPlayerController sharedInstance] play];
       
             }
@@ -980,7 +1011,9 @@ NSString * const detailSegueName = @"NewRunDetails";
             
             NSString * newTextHour = [[NSString alloc] initWithFormat:@"Time %@ hours %@ minutes %@ seconds, distance %@, speed %@ minutes %@ seconds per mile.", timeTruncHour, timeTruncMin, timeTruncSec,[MathController stringifyDistance:self.distance],speedTrunc3, speedTrunc3begin];
             
-            [[GVMusicPlayerController sharedInstance] pause];
+            //[[GVMusicPlayerController sharedInstance] pause];
+            [myPlayer pause];
+            [_audioPlayer play];
             //[self setAudioSessionWithDucking:YES];
             [NSTimer scheduledTimerWithTimeInterval:12.0
                                              target:self
@@ -1031,7 +1064,8 @@ NSString * const detailSegueName = @"NewRunDetails";
         
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level white. Get to 5 miles to reach badge level bronze.", [MathController stringifyDistance:self.distance]];
         
-        [[GVMusicPlayerController sharedInstance] pause];
+        //[[GVMusicPlayerController sharedInstance] pause];
+        [myPlayer pause];
         //[self setAudioSessionWithDucking:YES];
         [NSTimer scheduledTimerWithTimeInterval:12.0
                                          target:self
@@ -1056,7 +1090,8 @@ NSString * const detailSegueName = @"NewRunDetails";
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level bronze. Get to 10 miles to reach badge level silver.", [MathController stringifyDistance:self.distance]];
         
         
-        [[GVMusicPlayerController sharedInstance] pause];
+        //[[GVMusicPlayerController sharedInstance] pause];
+        [myPlayer pause];
         //[self setAudioSessionWithDucking:YES];
         [NSTimer scheduledTimerWithTimeInterval:12.0
                                          target:self
@@ -1081,7 +1116,8 @@ NSString * const detailSegueName = @"NewRunDetails";
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level silver. Get to 15 miles to reach badge level gold.", [MathController stringifyDistance:self.distance]];
         
         
-        [[GVMusicPlayerController sharedInstance] pause];
+        //[[GVMusicPlayerController sharedInstance] pause];
+        [myPlayer pause];
         //[self setAudioSessionWithDucking:YES];
         [NSTimer scheduledTimerWithTimeInterval:12.0
                                          target:self
@@ -1106,7 +1142,8 @@ NSString * const detailSegueName = @"NewRunDetails";
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level gold. Get to 20 miles to reach badge level royal purple.", [MathController stringifyDistance:self.distance]];
         
         
-        [[GVMusicPlayerController sharedInstance] pause];
+        //[[GVMusicPlayerController sharedInstance] pause];
+        [myPlayer pause];
         //[self setAudioSessionWithDucking:YES];
         [NSTimer scheduledTimerWithTimeInterval:12.0
                                          target:self
@@ -1131,7 +1168,8 @@ NSString * const detailSegueName = @"NewRunDetails";
         NSString *mileText = [[NSString alloc]initWithFormat:@"You have reached %@ and are at badge level royal purple. You have reached the highest badge level.", [MathController stringifyDistance:self.distance]];
         
         
-        [[GVMusicPlayerController sharedInstance] pause];
+        //[[GVMusicPlayerController sharedInstance] pause];
+        [myPlayer pause];
         //[self setAudioSessionWithDucking:YES];
         [NSTimer scheduledTimerWithTimeInterval:12.0
                                          target:self
