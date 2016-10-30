@@ -8,6 +8,7 @@
 
 @interface PastRunsViewController ()
 
+@property (strong, nonatomic) NSString * stringIntValue;
 
 @end
 
@@ -20,6 +21,9 @@
     [super viewDidLoad];
     
     //[myTableView reloadData];
+    
+    
+
     
     
 }
@@ -40,7 +44,7 @@
     
     cell.distanceLabel.text = [MathController stringifyDistance:runObject.distance.floatValue];
     
-    NSLog(@"runObject distance value is: %f", runObject.distance.floatValue);
+    //NSLog(@"runObject distance value is: %f", runObject.distance.floatValue);
     
     
     
@@ -49,6 +53,19 @@
     
     
     return cell;
+}
+
+-(int)sum
+{
+    int sum = 0;
+    for(int i = 0; i < self.runArray.count; i++)
+    {
+        Run *runObject = [self.runArray objectAtIndex:i];
+        sum += runObject.distance.integerValue;
+    }
+    return sum;
+    //    NSString * stringIntValue = [MathController stringifyDistance:sum];
+    //    NSLog(@"PRINT STRINGINTVALUE = %@", stringIntValue);
 }
 
 #pragma mark - Navigation
@@ -62,4 +79,20 @@
     }
 }
 
+- (IBAction)milesToDateButtonPress:(id)sender {
+    
+    int total = [self sum];
+    
+    _stringIntValue = [MathController stringifyDistance:total];
+    //NSLog(@"PRINT STRINGINTVALUE = %@", _stringIntValue);
+    
+    NSString * message = [NSString stringWithFormat:@"Total Miles to Date = %@", _stringIntValue];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Miles to Date"
+                                                       message:message
+                                                      delegate:self
+                                             cancelButtonTitle:@"Ok"
+                                             otherButtonTitles:nil];
+    alertView.tag = 1;
+    [alertView show];
+}
 @end

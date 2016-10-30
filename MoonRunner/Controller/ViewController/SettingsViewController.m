@@ -30,6 +30,8 @@
     [self fetchVoiceMin];
     [self fetchVoiceStart];
     [self fetchVoicestop];
+    
+    
 
     
 }
@@ -377,6 +379,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
+
+
 
 
 
