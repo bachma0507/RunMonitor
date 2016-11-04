@@ -850,13 +850,15 @@ NSString * const detailSegueName = @"NewRunDetails";
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'no'"]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'yes'"]];
     
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
     self.objects = results;
     
-        if (!results || !results.count){ //begin if no results
+        if (results.count > 0){ //begin if results
+            
+            //NSLog(@"VOICEMILE IS SET TO YES");
     
     if([[MathController stringifyDistance:self.distance] isEqualToString:@"1.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"2.00 mi"] || [[MathController stringifyDistance:self.distance] isEqualToString:@"3.00 mi"]|| [[MathController stringifyDistance:self.distance] isEqualToString:@"4.00 mi"]){
         
@@ -985,7 +987,7 @@ NSString * const detailSegueName = @"NewRunDetails";
     }
     }//end if no results
 else{
-    NSLog(@"VOICEMILE SET TO NO");
+    NSLog(@"VOICEMILE IS SET TO NO OR BLANK");
     
         }
     

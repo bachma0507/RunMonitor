@@ -45,19 +45,19 @@
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'no'"]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'yes'"]];
     
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
     self.objects = results;
     
     if (!results || !results.count){
-        [self.mileMarkerButton setTitle:@"Mile Marker Voice On" forState:normal];
-        [self.mileMarkerButton setTitleColor:[UIColor greenColor] forState:normal];
-    }
-    else{
         [self.mileMarkerButton setTitle:@"Mile Marker Voice Off" forState:normal];
         [self.mileMarkerButton setTitleColor:[UIColor redColor] forState:normal];
+    }
+    else{
+        [self.mileMarkerButton setTitle:@"Mile Marker Voice On" forState:normal];
+        [self.mileMarkerButton setTitleColor:[UIColor greenColor] forState:normal];
     }
     
 
@@ -160,14 +160,14 @@
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Voice" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'no'"]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"voicemile == 'yes'"]];
     
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
     self.objects = results;
     
     if (!results || !results.count){
-        [newVoice setValue:@"no" forKey:@"voicemile"];
+        [newVoice setValue:@"yes" forKey:@"voicemile"];
         
         // Save the context.
         NSError *error = nil;
@@ -175,20 +175,20 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
-        [self.mileMarkerButton setTitle:@"Mile Marker Voice Off" forState:normal];
-        [self.mileMarkerButton setTitleColor:[UIColor redColor] forState:normal];
+        [self.mileMarkerButton setTitle:@"Mile Marker Voice On" forState:normal];
+        [self.mileMarkerButton setTitleColor:[UIColor greenColor] forState:normal];
     }
     else{
         NSManagedObject *object = [results objectAtIndex:0];
-        [object setValue:@"yes" forKey:@"voicemile"];
+        [object setValue:@"no" forKey:@"voicemile"];
         
         NSError *error = nil;
         // Save the object to persistent store
         if (![self.managedObjectContext save:&error]) {
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
         }
-        [self.mileMarkerButton setTitle:@"Mile Marker Voice On" forState:normal];
-        [self.mileMarkerButton setTitleColor:[UIColor greenColor] forState:normal];
+        [self.mileMarkerButton setTitle:@"Mile Marker Voice Off" forState:normal];
+        [self.mileMarkerButton setTitleColor:[UIColor redColor] forState:normal];
     }
 
 }

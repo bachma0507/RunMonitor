@@ -58,10 +58,27 @@
 -(int)sum
 {
     int sum = 0;
+   
     for(int i = 0; i < self.runArray.count; i++)
     {
         Run *runObject = [self.runArray objectAtIndex:i];
         sum += runObject.distance.integerValue;
+
+    }
+    return sum;
+    //    NSString * stringIntValue = [MathController stringifyDistance:sum];
+    //    NSLog(@"PRINT STRINGINTVALUE = %@", stringIntValue);
+}
+
+-(int)sumPace
+{
+    int sum = 0;
+    
+    for(int i = 0; i < self.runArray.count; i++)
+    {
+        Run *runObject = [self.runArray objectAtIndex:i];
+        sum += runObject.duration.integerValue;
+        
     }
     return sum;
     //    NSString * stringIntValue = [MathController stringifyDistance:sum];
@@ -82,11 +99,17 @@
 - (IBAction)milesToDateButtonPress:(id)sender {
     
     int total = [self sum];
+    int totalDuration = [self sumPace];
+    //int averageDuration = totalDuration/self.runArray.count;
+    //int averagePace = totalDuration/total;
+    //int averagePace = averageDuration/total;
     
     _stringIntValue = [MathController stringifyDistance:total];
+    NSString * stringAvePace = [MathController stringifyAvgPaceFromDist:total overTime:totalDuration];
+    //NSString * strintIntPaceValue = [MathController stringifySecondCount:self.run.duration.intValue usingLongFormat:YES];
     //NSLog(@"PRINT STRINGINTVALUE = %@", _stringIntValue);
     
-    NSString * message = [NSString stringWithFormat:@"Total Miles to Date = %@", _stringIntValue];
+    NSString * message = [NSString stringWithFormat:@"Total Miles to Date = %@, at average pace %@", _stringIntValue, stringAvePace];
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Miles to Date"
                                                        message:message
                                                       delegate:self
